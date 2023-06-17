@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProductCard from "@/components/card";
 import { ProductType } from "../../../../data";
 import { ProductData } from "../../../../data";
+import Link from "next/link";
 
 const TopProduct = () => {
   var settings = {
@@ -25,13 +26,11 @@ const TopProduct = () => {
 
       <Slider {...settings}>
         {ProductData?.map((item, index) => (
-          <div key={index}>
+          <Link href="/product" key={index}>
             <ProductCard
               img={item?.img}
-              price={item?.price}
-              name={item?.name}
             />
-          </div>
+          </Link>
         ))}
       </Slider>
     </div>

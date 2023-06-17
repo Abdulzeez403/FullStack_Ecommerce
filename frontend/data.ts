@@ -5,6 +5,7 @@ export interface ProductType {
   oldPrice: string;
   price: string;
   description: string;
+  category: string;
 }
 
 export const ProductData: ProductType[] = [
@@ -14,24 +15,39 @@ export const ProductData: ProductType[] = [
     rating: 12,
     price: "3,000",
     description: "The best product to find on ",
-    oldPrice: "1,500"
+    oldPrice: "1,500",
+    category: "Clothes"
   },
   {
-    name: "Blue Jeans",
+    name: "Iphone 13",
     img: "/../public/images/phones.png ",
     rating: 12,
     price: "3,000",
     oldPrice: "1,500",
     description: "The best product to find on ",
+    category: "Phones"
+
   },
 
   {
-    name: "  Blue Jeans",
+    name: "Lus Sneakers",
     img: "/../public/images/shoes.png",
     rating: 12,
     price: "3,000",
     oldPrice: "1,500",
     description: "The best product to find on ",
+    category: "Sneakers"
+
+  },
+  {
+    name: "Park Radio ",
+    img: "/../public/images/electronics.png",
+    rating: 12,
+    price: "3,000",
+    oldPrice: "1,500",
+    description: "The best product to find on ",
+    category: "Electronics"
+
   },
   {
     name: "Blue Jeans",
@@ -40,6 +56,8 @@ export const ProductData: ProductType[] = [
     price: "3,000",
     oldPrice: "1,500",
     description: "The best product to find on ",
+    category: "Electronics"
+
   },
   {
     name: "Blue Jeans",
@@ -48,6 +66,8 @@ export const ProductData: ProductType[] = [
     price: "3,000",
     oldPrice: "1,500",
     description: "The best product to find on ",
+    category: "Electronics"
+
   },
   {
     name: "Blue Jeans",
@@ -56,13 +76,7 @@ export const ProductData: ProductType[] = [
     price: "3,000",
     oldPrice: "1,500",
     description: "The best product to find on ",
-  },
-  {
-    name: "Blue Jeans",
-    img: "/../public/images/electronics.png",
-    rating: 12,
-    price: "3,000",
-    oldPrice: "1,500",
-    description: "The best product to find on ",
+    category: "Electronics"
+
   },
 ];

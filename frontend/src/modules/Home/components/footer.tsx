@@ -6,29 +6,16 @@ export const Footer = () => {
   return (
     <div className="">
       <div className="  bg-black p-10 block w-[80%] mx-auto md:flex md:justify-between  lg:flex lg:justify-between ">
-        <div>
-          <nav className="">
-            <h4 className="text-white font-bold text-[1rem]">
-              Job Seeker
-            </h4>
-            <ul className="my-2">
-              <li>
-                <Link href="/">
-                  <h4 className="text-white ">Create a Resume</h4>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <h4 className="text-white">Sample</h4>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <h4 className="text-white">Cover Letter Sample</h4>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <div className="w-[25%]" >
+          <h4 className="text-white font-bold text-[1.5rem] py-3">
+            CityStore
+          </h4>
+          <div>
+            <p className="text-white text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Provident esse aspernatur eaque
+              veniam delectus iusto quidem. Minima illo incidunt laborum, assumenda maxime ut odit nemo
+              voluptatem amet aut iusto fugiat.</p>
+          </div>
         </div>
 
         <div>
@@ -120,10 +107,9 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-white pt-10">
+      <div className="text-center text-gray-300  bg-black  w-[80%] mx-auto py-4 border-2 border-gray-300">
         <h4>
-          <span className="font-extrabold">Copyright</span> {"/U+00A9"}
-          {new Date().getFullYear()}
+          <span className="font-extrabold">Copyright @</span> Sodiq All Right Reserved
         </h4>
       </div>
     </div>

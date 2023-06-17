@@ -31,4 +31,4 @@ const upLoadFiles = async (file, fileName) => {
     return uri?.secure_url;
 };
 
-module.exports = { mapFiles, upLoadFiles }
+module.exports = { mapFiles }

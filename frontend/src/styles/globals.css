@@ -7,9 +7,8 @@
 @import "react-toastify/dist/ReactToastify.css";
 
 body {
-  
   font-family: "Roboto", sans-serif;
-  /* background: rgb(241, 240, 240) */
+  background: rgb(241, 240, 240)
 }
 
 #components-form-demo-normal-login .login-form {

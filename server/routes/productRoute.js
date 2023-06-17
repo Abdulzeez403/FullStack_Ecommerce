@@ -7,4 +7,5 @@ const {
 
 router.post("/", CreateProduct);
 
+
 module.exports = router;

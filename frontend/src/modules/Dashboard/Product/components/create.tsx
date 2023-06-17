@@ -45,9 +45,11 @@ export const CreatePost = () => {
 
   };
 
+  console.log(files)
+
   return (
     <Formik
-      initialValues={{ name: "", body: "", images: "", category: "", price: "", }}
+      initialValues={{ Product_name: "", categories: ["test"], price: "", }}
       // validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -56,7 +58,7 @@ export const CreatePost = () => {
           <ApTextInput
             type="text"
             label="Name"
-            name="name"
+            name="Product_name"
             className=" p-2 rounded-md outline-0 border hover:bg-white  "
           />
 
@@ -68,18 +70,13 @@ export const CreatePost = () => {
           />
 
 
-          <ApTextInput
+          {/* <ApTextInput
             type="text"
             label="Category"
             name="category"
             className=" p-2 rounded-md outline-0 border hover:bg-white"
-          />
-          <ApTextInput
-            type="text"
-            label="Tags"
-            name="tags"
-            className=" p-2 rounded-md outline-0 border hover:bg-white"
-          />
+          /> */}
+          
 
           <Files
             fileList={files}
@@ -89,7 +86,7 @@ export const CreatePost = () => {
 
           <button
             type="submit"
-            className="text-white bg-blue-500 rounded-md  px-10 text-lg  my-6"
+            className="text-white bg-blue-500 rounded-md  px-10   my-6"
           >
             Submit
           </button>
