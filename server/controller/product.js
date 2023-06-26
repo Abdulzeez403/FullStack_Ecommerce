@@ -1,43 +1,55 @@
 
 const asyncHandler = require("express-async-handler");
-const {  mapFiles } = require("../middleware/file");
+const { upLoadFiles, mapFiles } = require("../middleware/file");
 const productSchema = require("../models/productSchema")
 
- const CreateProduct = asyncHandler(async (req, res) => {
-  // const { Product_name, description, images, price } = req.body;
-  // let { uri, name, type } = images;
+// const CreateProduct = asyncHandler(async (req, res) => {
+//   const { Product_name, description, images, price } = req.body;
 
-  const { images, ...values } = req.body;
+//   // const images = req.files
+
+//   // const { images, ...values } = req.body;
+
+//   try {
+//     const files = await mapFiles(images);
+
+//     const product = await productSchema.create({
+//       Product_name,
+//       description,
+//       price,
+//       images: files,
+//     });
+//     // const product = new productSchema({ ...values, images: files });
+//     const data = await product.save();
+//     console.log(data)
+//     res.send(data)
+//   } catch (errors) {
+//     res.json({ success: false, errors });
+//     console.log(errors)
+//   }
+
+// });
+const CreateProduct = async (req, res) => {
+  const { Product_name, description, images, price } = req.body;
+
 
   try {
-    const files = await mapFiles(images);
-    // const product = await productSchema.create({
-    //   Product_name,
-    //   description,
-    //   price,
-    //   images: { uri: files, name, type },
-    // });
-    const product = new productSchema({ ...values, images: files });
+    const fls = await mapFiles(images);
+    const product = await productSchema.create({
+      Product_name,
+      description,
+      price,
+      images: fls,
+    });
     const data = await product.save();
+    res.json({ success: true, message: 'Product created successfully', product: data });
     console.log(data)
-    res.json({ success: true, data: data });
   } catch (errors) {
     res.json({ success: false, errors });
     console.log(errors)
   }
 
-});
-// const CreateProduct = async (req, res) => {
-//     const { images, ...values } = req.body;
-//     // const {images} = req.file.body;
-//     try {
-//       const files = await mapFiles(images);
-//       const product = new productSchema({ ...values, images: files });
-//       const data= await product.save();
-//       res.json({ data });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+
+};
 
 module.exports = { CreateProduct }

@@ -31,17 +31,19 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
 
   const CreateProduct = async (values: IProduct) => {
     try {
-      await axios
-        .post(`http://localhost:5000/api/product`, values, {
-          headers: { "Content-Type": "application/json" },
-        }
-        )
+      await fetch(`${process.env.AUTH_URL}/product/product`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(values)
+      }
+      )
         .then((data) => {
-          setProducts(data?.data);
+          setProducts(data as any);
           toast.success("Product Successfully");
         });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
+
     }
   };
 
