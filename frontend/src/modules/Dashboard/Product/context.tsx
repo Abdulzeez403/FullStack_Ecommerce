@@ -31,7 +31,7 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
 
   const CreateProduct = async (values: IProduct) => {
     try {
-      await fetch(`${process.env.AUTH_URL}/product/product`, {
+      await fetch(` http://localhost:5000/api/product/product`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(values)

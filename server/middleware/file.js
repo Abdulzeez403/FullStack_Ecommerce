@@ -12,7 +12,7 @@ const mapFiles = async (files) => {
     const mappedFiles = [];
 
     if (Array.isArray(files) && files.length > 0) {
-        for (const fls of images) {
+        for (const fls of files) {
             const { name, type, uri } = fls;
             const publicId = name;
 

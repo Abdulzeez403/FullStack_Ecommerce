@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel } from "antd";
 import Image from "next/image";
+import ApImage from "@/components/images/image";
 
 const contentStyle: React.CSSProperties = {
   height: "384px",
@@ -14,84 +15,12 @@ const contentStyle: React.CSSProperties = {
 export const CarouselPage = () => {
   return (
     <div className="flex justify-center m-0 items-center">
-      <div className="w-[70%] mx-auto  bg-red-500">
-        <div className=" flex space-x-2">
-          <div className="w-[822px] rounded-md ">
+      <div className="w-[50%] h-[450px] rounded-2x1 border-2 bg-red-200 ">
             <Carousel autoplay dots={true}>
-              <div className="w-[73%]  ">
-                <Image
-                  src="/../public/images/jumia.jpg "
-                  width={2000}
-                  height={5000}
-                  alt="Phone_Category"
-                  priority
-                  object-fit="contain"
-                  className="bg-yellow-400 rounded-md"
-                />
-              </div>
-
-              <div className="w-[73%]  ">
-                <Image
-                  src="/../public/images/Desktop_Homepage.png "
-                  width={2000}
-                  height={5000}
-                  alt="Phone_Category"
-                  priority
-                  object-fit="contain"
-                  className="bg-yellow-400 rounded-sm"
-                />
-              </div>
-
-              <div className="w-[73%]  ">
-                <Image
-                  src="/../public/images/jumia.jpg "
-                  width={2000}
-                  height={5000}
-                  alt="Phone_Category"
-                  priority
-                  object-fit="contain"
-                  className="bg-yellow-400 rounded-sm"
-                />
-              </div>
-              <div>
-                <Image
-                  src="/../public/images/Desktop.jpg"
-                  width={2000}
-                  height={5000}
-                  alt="Phone_Category"
-                  priority
-                  object-fit="contain"
-                  className="bg-yellow-400 rounded-sm"
-                />
-              </div>
+              <ApImage imgUrl="/../public/images/jumia.jpg " alt="phone" />
+              <ApImage imgUrl="/../public/images/Desktop_Homepage.png " alt="phone" />
+              <ApImage imgUrl="/../public/images/Desktop.jpg" alt="phone" />
             </Carousel>
-          </div>
-
-          <div className=" space-y-3">
-            <div className="bg-red-300 w-60 h-[210px] rounded-lg bottom-2">
-              <Image
-                src="/../public/images/free-delivery.png "
-                width={500}
-                height={500}
-                alt="Phone_Category"
-                priority
-                object-fit="contain"
-                className="bg-yellow-400 rounded-md"
-              />
-            </div>
-            <div className="bg-blue-300 w-60 h-[210px]  rounded-lg ">
-              <Image
-                src="/../public/images/free-delivery.png "
-                width={500}
-                height={500}
-                alt="Phone_Category"
-                priority
-                object-fit="contain"
-                className="bg-yellow-400 rounded-md"
-              />
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

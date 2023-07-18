@@ -2,10 +2,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import ProductCard from "@/components/card";
 import { ProductType } from "../../../../data";
 import { ProductData } from "../../../../data";
 import Link from "next/link";
+import CategoryCard from "@/components/categoryCard";
 
 const TopProduct = () => {
   var settings = {
@@ -19,21 +19,24 @@ const TopProduct = () => {
   };
 
   return (
-    <div className=" w-[70%] mx-auto py-4">
-      <div className=" bg-red-500 py-4">
-        <h4 className="text-white  px-5 font-bold text-lg">Top Products</h4>
+    <div className=" w-[70%] mx-auto py-6">
+      <div className=" bg-red-600 py-3 ">
+        <h4 className=" text-white px-5 font-extrabold text-lg">Our Top Category</h4>
       </div>
+
 
       <Slider {...settings}>
         {ProductData?.map((item, index) => (
           <Link href="/product" key={index}>
-            <ProductCard
+            <CategoryCard
               img={item?.img}
+              name ={item?.name}
             />
           </Link>
         ))}
       </Slider>
-    </div>
+</div>
+
   );
 };
 
