@@ -2,7 +2,14 @@ import React from 'react'
 import Image from "next/image"
 import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { TbCurrencyNaira } from 'react-icons/tb'
-export const DetailPage = () => {
+import { IProduct } from '../Dashboard/Product/models'
+
+interface IProps {
+    productId: IProduct
+}
+
+
+export const DetailPage: React.FC<IProps> = ({ productId }) => {
     return (
         <div className=' w-[90%] mx-auto  my-4'>
 
@@ -12,15 +19,13 @@ export const DetailPage = () => {
                 <div className='w-[60%] flex space-x-6 bg-white rounded-md border-2  align-items-center'>
                     <div className=' bg-gray-300 px-5 py-5 my-5 mx-5'>
                         <div className='flex justify-center align-items m-0'>
-                            <Image src="/../public/images/phones.png" width={300} height={400} alt="ProductImage" />
+                            <Image src={productId?.images[0]?.uri} width={300} height={400} alt="ProductImage" />
                         </div>
                     </div>
 
                     <div className=''>
-                        <h4 className='font-bold text-lg my-2'>Men Vintage Short Sleeve Stand Collar Shirt-Yellow</h4>
-                        {/* <p className=''>description: Lorem ipsum dolor sit, amet
-                            consectetur adipisicing elit. Doloremque debitis
-                            distinctio omnis a, illum quod minima quas suscipit possimus odio!</p> */}
+                        <h4 className='font-bold text-lg my-2'>{productId?.Product_name}</h4>
+                        <p className=''>{productId?.description}</p>
 
                         <div className='my-2'>
                             <div className="flex space-x-1">
@@ -37,7 +42,7 @@ export const DetailPage = () => {
 
                             <div className="flex  items-center">
                                 <TbCurrencyNaira size={21} />
-                                <h4 className="font-bold text-[1.2rem]"> 1,200</h4>
+                                <h4 className="font-bold text-[1.2rem]">{productId?.price}</h4>
                             </div>
 
                             <div className="flex  items-center line-through">

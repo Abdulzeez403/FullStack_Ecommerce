@@ -180,7 +180,6 @@ export const Header = () => {
               <button>
                 <div className="flex gap-x-2 items-center  hover:text-yellow-500 focus:border-2" onClick={() => {
                   LogOutUser();
-                  console.log("kdkdk")
                 }}>
                   <ShoppingCartOutlined style={{ fontSize: 20 }} />
                   <h4 className="font-semibold">Chart</h4>

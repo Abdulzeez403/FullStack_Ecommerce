@@ -7,15 +7,16 @@ import { UserContextProvder } from "@/modules/auth/UserContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-  
-      <UserContextProvder>
-        <ProductProvder>
-          <Component {...pageProps} />
-          <Notification />
-        </ProductProvder>
-      </UserContextProvder>
 
+    <UserContextProvder>
+      {/* <ProductContextProvder> */}
 
-    
+      <ProductProvder>
+        <Component {...pageProps} />
+        <Notification />
+      </ProductProvder>
+      {/* </ProductContextProvder> */}
+
+    </UserContextProvder>
   );
 }

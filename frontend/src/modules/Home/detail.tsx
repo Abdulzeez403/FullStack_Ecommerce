@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CarouselPage } from "./components/carousel";
 import TopProduct from "./components/topProduct";
 import { Product } from "./components/product";
+import { useProductContext } from "@/modules/Dashboard/Product/context";
+
 
 const Detail = () => {
+  const { products, GetProducts } = useProductContext();
+
+  useEffect(() => {
+    GetProducts();
+  }, [])
   return (
     <div className="  my-4 ">
-      <CarouselPage />
-      <TopProduct />
-      <Product/>
+      <div>
+        <CarouselPage />
+
+      </div>
+      <TopProduct products={products} />
+      <Product products={products} />
     </div>
   );
 };

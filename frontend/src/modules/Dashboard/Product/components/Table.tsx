@@ -1,82 +1,64 @@
 import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import ApImage from '@/components/images/image';
+import { IProduct } from '../models';
 
-interface DataType {
-    key: string;
-    ProductImage: string;
-    name: string;
-    price: string;
-    description: string;
-    tags: string[];
+interface IProps {
+    product: IProduct[]; // Assuming IProduct is an interface representing your product data
 }
 
-const columns: ColumnsType<DataType> = [
-    {
-        title: 'ProductImage',
-        dataIndex: 'ProductImage',
-        key: 'ProductImage',
-    },
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Price',
-        dataIndex: 'price',
-        key: 'price',
-    },
-    {
-        title: 'description',
-        dataIndex: 'description',
-        key: 'description',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
-            <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (_, record) => (
-            <Space size="middle">
-                <a>Edit</a>
-                <a>Delete</a>
-            </Space>
-        ),
-    },
-];
+const ProductTable: React.FC<IProps> = ({ product }) => {
 
-const data: DataType[] = [
-    {
-        key: '1',
-        ProductImage: "/../public/images/phones.png",
-        name: 'John Brown',
-        price: "3000",
-        description: "This is the descripton of the product",
-        tags: ['nice', 'developer'],
-    },
+    const columns: ColumnsType<any> = [
+        {
+            title: 'ProductImage',
+            dataIndex: 'images',
+            render: (_: any, record: IProduct) => (
+                <div>
+                    {record?.images?.length && (
+                        <div>
+                            <ApImage imgUrl={record?.images[0]?.uri} alt={"image"}
+                                width={50} height={50} />
+                        </div>
+                    )}
+                </div>
 
-];
 
-const ProductTable: React.FC = () => <Table columns={columns} dataSource={data} />;
+            ),
+        },
+        {
+            title: 'Product_name',
+            dataIndex: 'Product_name',
+        },
+        {
+            title: 'Price',
+            dataIndex: 'price',
+        },
+        {
+            title: 'Categories',
+            dataIndex: 'categories',
+            render: (_: any, record: IProduct) => (
+                <h4>{record?.categories?.map((c) => c.value)}</h4>
+            ),
+        },
+        {
+            title: 'Description',
+            dataIndex: 'description',
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+                    <a>Edit</a>
+                    <a>Delete</a>
+                </Space>
+            ),
+        },
+    ];
+
+    return <Table columns={columns} dataSource={product} />;
+};
 
 export default ProductTable;

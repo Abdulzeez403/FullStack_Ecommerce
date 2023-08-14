@@ -8,13 +8,13 @@ import { AiTwotoneStar } from "react-icons/ai";
 
 interface IProps {
   name?: string;
-  img?: any;
+  img?: any[];
   rating?: number;
   price?: string;
   oldPrice?: string;
   description?: string;
   proudctDetail?: string;
-  category?: string
+  category?: string[]
 }
 const ProductCard: React.FC<IProps> = ({
   img,
@@ -28,19 +28,19 @@ const ProductCard: React.FC<IProps> = ({
 }) => (
   <Card style={{ width: 245 }} >
     <div>
-      <Image src={img} width={200} height={200} alt="ProductImage" />
+      <Image src={img as any} width={200} height={200} alt="ProductImage" />
       <h4 className="text-lg text-red-600 font-semibold">{category}</h4>
       <h4 className="text-lg">{name}</h4>
     </div>
 
 
-      <div className="  my-2">
-        <div className="flex space-x-1">
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarHalf size={14} color="Orange" />
+    <div className="  my-2">
+      <div className="flex space-x-1">
+        <BsStarFill size={14} color="Orange" />
+        <BsStarFill size={14} color="Orange" />
+        <BsStarFill size={14} color="Orange" />
+        <BsStarFill size={14} color="Orange" />
+        <BsStarHalf size={14} color="Orange" />
       </div>
       <div className="flex space-x-5 items-center my-2">
 

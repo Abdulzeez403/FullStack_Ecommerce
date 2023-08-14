@@ -1,11 +1,10 @@
 // import { Slider } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import Image from "next/image";
-import { ProductType } from "../../../../data";
 import { ProductData } from "../../../../data";
 import Link from "next/link";
 import CategoryCard from "@/components/categoryCard";
+
 
 const TopProduct = () => {
   var settings = {
@@ -30,12 +29,12 @@ const TopProduct = () => {
           <Link href="/product" key={index}>
             <CategoryCard
               img={item?.img}
-              name ={item?.name}
+              name={item?.name}
             />
           </Link>
         ))}
       </Slider>
-</div>
+    </div>
 
   );
 };

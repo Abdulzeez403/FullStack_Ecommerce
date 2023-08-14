@@ -15,11 +15,12 @@ const SignIn: React.FC = () => {
   const onFinish = async (user: IAuthSignIn) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/user/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      }); 
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/login`
+        , {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
       setLoading(false);
       const data = await res.json();
       localStorage.setItem("currentUser", JSON.stringify(data));

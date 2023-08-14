@@ -37,7 +37,7 @@ export const SignUp: React.FC = () => {
         setLoading(true);
 
         try {
-            fetch(`http://localhost:5000/api/user/Register`, {
+            fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/Register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

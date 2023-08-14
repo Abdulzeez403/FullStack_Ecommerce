@@ -2,13 +2,19 @@ const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const ProductSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: "User",
+    },
+
     Product_name: {
         type: String,
     },
     description: {
         type: String,
     },
-  
+
     images: [
         {
             uri: { type: String },
@@ -49,7 +55,7 @@ const ProductSchema = new mongoose.Schema({
             Number
     },
 
-  
+
 });
 
 //Export the model
