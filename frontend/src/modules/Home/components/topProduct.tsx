@@ -1,40 +1,68 @@
 // import { Slider } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import Slider from "react-slick";
-import { ProductData } from "../../../../data";
-import Link from "next/link";
+import React from "react";
+import { BsPhone } from "react-icons/bs";
 import CategoryCard from "@/components/categoryCard";
+import { TbBooks } from "react-icons/tb";
+import { MdOutlineToys } from "react-icons/md";
+import ApTextHeader from "@/components/typography/header";
+import { Icon } from '@iconify/react';
 
 
 const TopProduct = () => {
-  var settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-  };
 
   return (
-    <div className=" w-[70%] mx-auto py-6">
-      <div className=" bg-red-600 py-3 ">
-        <h4 className=" text-white px-5 font-extrabold text-lg">Our Top Category</h4>
+    <div className="py-6 ">
+      <div className="flex justify-between items-center">
+        <div className=" py-3 ">
+          <ApTextHeader title='Our Top Category' />
+        </div>
+
+        <div>
+          <h4 className="text-sm text-slate-600">Sell all</h4>
+        </div>
       </div>
 
 
-      <Slider {...settings}>
-        {ProductData?.map((item, index) => (
-          <Link href="/product" key={index}>
-            <CategoryCard
-              img={item?.img}
-              name={item?.name}
-            />
-          </Link>
-        ))}
-      </Slider>
+      <div className="flex gap-x-2 py-4  ">
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Phones" />
+
+        <CategoryCard
+          icon={<Icon icon="mdi:shoe-sneaker" height='40' width="35" />}
+          title="Shoes" />
+
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Electrionc" />
+
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Shirt" />
+        <CategoryCard
+          icon={<TbBooks style={{ fontSize: 32 }} />}
+          title="Book" />
+        <CategoryCard
+          icon={<MdOutlineToys style={{ fontSize: 32 }} />}
+          title="Toys" />
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Software" />
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Laptops" />
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Deskstop" />
+        <CategoryCard
+          icon={<BsPhone style={{ fontSize: 32 }} />}
+          title="Bags" />
+
+
+
+      </div>
     </div>
+
 
   );
 };

@@ -56,25 +56,6 @@ export const SignUp: React.FC = () => {
 
     };
 
-    // const handleSubmit = async (
-    //     values: IAuthSignUp,
-    //     { setSubmitting }: FormikHelpers<IAuth>
-    //   ) => {
-    //     try {
-    //       await axios
-    //         .post(`${process.env.AUTH_URL}/Register`, values)
-    //         .then(() => {
-    //           toast.success("Registered Successfully");
-    //         })
-    //         .then(() => {
-    //           router.push("/signIn");
-    //         });
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-
-    //     setSubmitting(false);
-    //   };
 
 
     return (

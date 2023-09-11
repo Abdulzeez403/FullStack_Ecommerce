@@ -21,6 +21,20 @@ module.exports = {
         sans: ["Roboto", "sans-serif"],
         // serif: ['Merriweather', 'serif'],
       },
+      screens: {
+
+        'xs': '380px',
+
+        "sm": "500px",
+
+        'md': '768px',
+
+        'lg': '1024px',
+
+        'xl': '1280px',
+
+        '2xl': '1536px',
+      }
 
     },
   },

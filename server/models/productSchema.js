@@ -1,6 +1,5 @@
-const mongoose = require('mongoose'); // Erase if already required
+const mongoose = require('mongoose');
 
-// Declare the Schema of the Mongo model
 const ProductSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -56,7 +55,6 @@ const ProductSchema = new mongoose.Schema({
     },
 
 
-});
-
-//Export the model
+},
+    { timestamps: true });
 module.exports = mongoose.model('Product', ProductSchema);

@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 export const Footer = () => {
   return (
     <div className="">
-      <div className="  bg-black p-10 block w-[80%] mx-auto md:flex md:justify-between  lg:flex lg:justify-between ">
+      <div className="  bg-black p-10 block  md:flex md:justify-between  lg:flex lg:justify-between ">
         <div className="w-[25%]" >
           <h4 className="text-white font-bold text-[1.5rem] py-3">
             CityStore

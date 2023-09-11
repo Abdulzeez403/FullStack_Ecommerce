@@ -6,9 +6,10 @@ interface IProps {
     alt: string;
     width?: number;
     height?: number;
+    className?: any
 }
 
-const ApImage: React.FC<IProps> = ({ imgUrl, alt, width = 2000, height = 2000 }) => {
+const ApImage: React.FC<IProps> = ({ imgUrl, alt, width = 2000, height = 1500, className }) => {
     return (
         <div>
 
@@ -19,7 +20,7 @@ const ApImage: React.FC<IProps> = ({ imgUrl, alt, width = 2000, height = 2000 })
                 alt={alt}
                 priority
                 object-fit="contain"
-                className="bg-yellow-400 rounded-sm"
+                className={`bg-yellow-400 rounded-lg ${className}`}
             />
         </div>
     )

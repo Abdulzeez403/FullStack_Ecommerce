@@ -13,5 +13,5 @@ const { protected } = require("../middleware/authMiddleware")
 router.post("/Register", RegisterUser);
 router.post("/Login", LogInUser);
 router.get("/Logout", LogOut);
-router.get("/current", protected, CurrentUser);
+router.get("/current/:id", CurrentUser);
 module.exports = router;

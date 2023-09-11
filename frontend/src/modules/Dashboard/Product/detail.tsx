@@ -23,7 +23,6 @@ export const DetailPage = () => {
 
   useEffect(() => {
     GetProduct(user?._id);
-    CurrentUser();
     console.log(user?._id, "UserId..");
 
   }, [])

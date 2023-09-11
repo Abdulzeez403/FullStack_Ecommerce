@@ -6,7 +6,6 @@ import { Category } from '../Home/components/category';
 
 interface IProps {
     children: React.ReactNode;
-
 }
 
 export const MainMenu: React.FC<IProps> = ({ children }) => {
@@ -14,11 +13,12 @@ export const MainMenu: React.FC<IProps> = ({ children }) => {
         <div>
             <Header />
             <Category />
-
-            {children}
-
+            <div className='w-[80%] mx-auto'>
+                {children}
+            </div>
             <Footer />
 
         </div>
+
     )
 }

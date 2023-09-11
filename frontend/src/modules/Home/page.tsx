@@ -4,9 +4,15 @@ import { MainMenu } from "../layout/home";
 
 const HomePage = () => {
   return (
-    <MainMenu>
-      <Detail />
-    </MainMenu>
+    <div>
+
+
+
+      <MainMenu>
+        <Detail />
+      </MainMenu>
+    </div>
+
   );
 };
 

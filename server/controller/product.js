@@ -86,10 +86,10 @@ const GetProducts = async (req, res) => {
 
 const GetProductDetail = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  // const body = req.body;
 
   try {
-    const product = await productSchema.findById(id, body, { new: true });
+    const product = await productSchema.findById(id, req.body, { new: true });
     res.status(200).send(product)
   }
   catch {
@@ -99,7 +99,6 @@ const GetProductDetail = async (req, res) => {
 
 const GetProduct = async (req, res) => {
   const userId = req.params.id;
-  console.log(userId)
   try {
     // const user = await userSchema.find({ userId })
     // console.log(user)
@@ -110,6 +109,7 @@ const GetProduct = async (req, res) => {
     }
     res.status(200).send(getProduct);
   } catch (error) {
+    1
     console.error("Error fetching products:", error);
     res.status(500).send("An error occurred while fetching products.");
   }

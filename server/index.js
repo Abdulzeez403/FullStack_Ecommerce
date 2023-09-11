@@ -16,6 +16,8 @@ app.use(cookieParser());
 app.use("/api/user", require("./routes/authRoutes"));
 app.use("/api/test", require("./routes/test"));
 app.use("/api", require("./routes/productRoute"));
+app.use("/api", require("./routes/cartRoutes"));
+
 
 dbase();
 app.listen(PORT, (req, res) => {

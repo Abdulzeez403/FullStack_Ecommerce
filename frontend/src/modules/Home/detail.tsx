@@ -12,12 +12,12 @@ const Detail = () => {
     GetProducts();
   }, [])
   return (
-    <div className="  my-4 ">
+    <div className="my-4 ">
       <div>
         <CarouselPage />
 
       </div>
-      <TopProduct products={products} />
+      <TopProduct />
       <Product products={products} />
     </div>
   );

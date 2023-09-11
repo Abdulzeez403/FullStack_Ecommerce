@@ -15,13 +15,17 @@ const contentStyle: React.CSSProperties = {
 export const CarouselPage = () => {
   return (
     <div className="flex justify-center m-0 items-center ">
-      <div className="rounded-md w-[60%]  rounded-2x1 border-2 bg-red-200 ">
+      <div className="w-[430px] px-8  md:w-[40rem] lg:w-[82rem]">
+
         <Carousel autoplay dots={true}>
-          <ApImage imgUrl="/../public/images/jumia.jpg " alt="phone" />
+          <ApImage imgUrl="/../public/images/hero2.png " alt="phone"
+          />
+
           <ApImage imgUrl="/../public/images/Desktop_Homepage.png " alt="phone" />
           <ApImage imgUrl="/../public/images/Desktop.jpg" alt="phone" />
         </Carousel>
       </div>
     </div>
+
   );
 };

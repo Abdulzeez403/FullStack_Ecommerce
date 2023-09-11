@@ -5,11 +5,13 @@ import router from 'next/router';
 import { toast } from 'react-toastify';
 import { IAuthSignIn } from './model';
 import Link from 'next/link';
+import useCookies from "../../components/hooks/cookies"
+import Cookies from "universal-cookie"
+
 
 const SignIn: React.FC = () => {
 
-
-
+  const cookies = new Cookies();
   const [loading, setLoading] = useState<boolean>(false);
 
   const onFinish = async (user: IAuthSignIn) => {
@@ -23,14 +25,14 @@ const SignIn: React.FC = () => {
         });
       setLoading(false);
       const data = await res.json();
-      localStorage.setItem("currentUser", JSON.stringify(data));
+      cookies.set("userId", data?._id)
+
       router.push("/");
       toast.success("Login Successfully");
     } catch (err) {
       toast.error("Error Occurred!");
     }
   };
-  // console.log('Received values of form: ', values);
 
 
   return (

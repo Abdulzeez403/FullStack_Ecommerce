@@ -3,46 +3,30 @@ import { Card } from "antd";
 import Image from "next/image";
 
 interface IProps {
-    img?: any;
-    name:string;
+  icon?: any;
+  title: string;
 
 }
 const CategoryCard: React.FC<IProps> = ({
-    img,
-    name
+  icon,
+  title,
 
 }) => (
-    <Card style={{ width: 205 }} >
-        <div>
-            <Image src={img} width={150} height={150} alt="ProductImage" />
-            <h4 className="text-lg text-center">{name}</h4>
+  <div className="w-[7rem]">
+    <div className="w-[4rem] mx-auto bg-slate-300 rounded-full p-4 ">
+      <div className="w-[2rem] mx-auto ">
+        <div className="">
+          <div className="justify-center m-0">
+            {icon}
+          </div>
         </div>
 
+      </div>
+    </div>
+    <h4 className="text-center pt-2 text-sm text-slate-700">{title}</h4>
 
-        <div className="  my-2">
-            {/* <div className="flex space-x-1">
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarFill size={14} color="Orange" />
-          <BsStarHalf size={14} color="Orange" />
-      </div> */}
-            {/* <div className="flex space-x-5 items-center my-2">
+  </div>
 
-        <div className="flex  items-center">
-          <TbCurrencyNaira size={21} />
-          <h4 className="font-bold text-lg"> {price}</h4>
-        </div>
-
-        <div className="flex  items-center line-through">
-          <TbCurrencyNaira size={21} color="gray" />
-          <h4 className="font-thin text-lg"> {oldPrice}</h4>
-        </div>
-      </div> */}
-
-
-        </div>
-    </Card>
 );
 
 export default CategoryCard;

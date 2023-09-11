@@ -8,7 +8,7 @@ const RegisterUser = asyncHandler(async (req, res) => {
   //Check whether the user already exist!
   const UserExist = await userSchema.findOne({ email });
   if (UserExist) {
-    res.send(400);
+    res.sendStatus(400);
     throw Error("The user is already exist!");
   }
 
@@ -26,7 +26,7 @@ const RegisterUser = asyncHandler(async (req, res) => {
       _id: User.id,
       firstName: User.firstName,
       email: User.email,
-      password: User.password
+      password: User.password,
     });
     console.log(User)
   } else {
@@ -51,7 +51,7 @@ const LogInUser = asyncHandler(async (req, res, next) => {
       res.status(404).send("User is not Found!");
     }
     if (User && (await User.matchPassword(password))) {
-      generateToken(res, User.id);
+      generateToken(res, User);
       res.status(200).json({
         _id: User.id,
         email: User.email,
@@ -77,14 +77,31 @@ const LogOut = asyncHandler(async (req, res) => {
 });
 
 const CurrentUser = async (req, res) => {
-  // const user = await UserSchema.findById(req.user._id);
-  // if (user) {
-  //   res.json({
-  //     _id: req.user.username,
-  //     emai: req.user.email,
-  //   });
-  // }
-  res.send({ msg: "The User" })
+
+  try {
+
+    const userId = req.params.id;
+    console.log(userId)
+    if (!userId) {
+      // Handle case where ID is missing
+      return res.status(404).json({ message: 'User ID not provided' });
+    }
+    const user = await userSchema.findById(req.params.id);
+    if (!user) {
+      // Handle case where user doesn't exist
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({
+      email: user.email,
+      firstName: user.firstName
+    });
+
+
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 
 };
 

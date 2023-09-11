@@ -10,29 +10,29 @@ import { useProductContext } from '../Dashboard/Product/context'
 
 
 
-type items {
-  key: string,
-  label:string,
-  children:React.ReactNode;
-}
+// type items {
+//   key: string,
+//   label: string,
+//   children: React.ReactNode;
+// }
 
-const items: CollapseProps["items"] = [
-  {
-    key: '1',
-    label: 'This is panel header 1',
-    children: <p>HTI</p>,
-  },
-  {
-    key: '2',
-    label: 'This is panel header 2',
-    children: <p>thid</p>,
-  },
-  {
-    key: '3',
-    label: 'This is panel header 3',
-    children: <p>this</p>,
-  },
-];
+// const items: CollapseProps["items"] = [
+//   {
+//     key: '1',
+//     label: 'This is panel header 1',
+//     children: <p>HTI</p>,
+//   },
+//   {
+//     key: '2',
+//     label: 'This is panel header 2',
+//     children: <p>thid</p>,
+//   },
+//   {
+//     key: '3',
+//     label: 'This is panel header 3',
+//     children: <p>this</p>,
+//   },
+// ];
 
 
 export const DetailPage: React.FC = () => {
@@ -53,7 +53,7 @@ export const DetailPage: React.FC = () => {
         <div className='w-[20%]  bg-white rounded-md border-2 pl-2 '>
           <h4 className='border-b-2 text-md  py-1'>Categories</h4>
           <div>
-            <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />
+            {/* <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} /> */}
           </div>
         </div>
         <div className=' flex space-x-4 bg-white   align-items-center'>

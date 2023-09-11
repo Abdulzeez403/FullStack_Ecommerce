@@ -1,15 +1,16 @@
 
 import React, { createContext, useContext, useState } from "react";
 
+
 interface IUser {
   user: any;
-  CurrentUser: () => void;
+  CurrentUser: (values: any, userId: any) => void;
   LogOutUser: () => Promise<any>;
 }
 
 const UserContext = createContext<IUser>({
   user: null,
-  CurrentUser() {
+  CurrentUser(values, userId) {
     return null;
   },
   LogOutUser() {
@@ -28,17 +29,32 @@ interface IProps {
   children: React.ReactNode;
 }
 
+
 export const UserContextProvder: React.FC<IProps> = ({ children }) => {
+
+
   const [user, setUser] = useState<any>({} as any);
 
-  const CurrentUser = () => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser") as any);
-    setUser(currentUser);
+  const CurrentUser = async (values: any, UserId: any) => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/current/${UserId}`, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(values)
+      }
+      )
+        .then((data) => {
+          setUser(data)
+
+        });
+    } catch (err) {
+      console.log(err);
+
+    };
   };
 
   const LogOutUser = async () => {
-    const LogMeOut = localStorage.removeItem("currentUser");
-    return LogMeOut;
+    // return removeCookie("userId");
   };
 
   return (
