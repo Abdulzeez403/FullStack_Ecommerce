@@ -4,41 +4,22 @@ import ProductCard from '@/components/card'
 import Link from 'next/link'
 import { AiOutlineEye, AiOutlineHeart, AiOutlineLock } from 'react-icons/ai'
 import { ProductData } from '../../../data'
-import { Collapse, } from 'antd'
-import type { CollapseProps } from 'antd';
+import { Collapse, CollapseProps, } from 'antd'
 import { useProductContext } from '../Dashboard/Product/context'
+import ApSideMenu from './components/sideMenu'
 
 
 
-// type items {
-//   key: string,
-//   label: string,
-//   children: React.ReactNode;
-// }
+type items = {
+  key: string,
+  label: string,
+  children: React.ReactNode;
+}
 
-// const items: CollapseProps["items"] = [
-//   {
-//     key: '1',
-//     label: 'This is panel header 1',
-//     children: <p>HTI</p>,
-//   },
-//   {
-//     key: '2',
-//     label: 'This is panel header 2',
-//     children: <p>thid</p>,
-//   },
-//   {
-//     key: '3',
-//     label: 'This is panel header 3',
-//     children: <p>this</p>,
-//   },
-// ];
 
 
 export const DetailPage: React.FC = () => {
-  const onChange = (key: string | string[]) => {
-    console.log(key);
-  };
+
 
 
   const { products, GetProducts } = useProductContext();
@@ -48,14 +29,16 @@ export const DetailPage: React.FC = () => {
   }, [])
 
   return (
-    <div className='w-[80%] mx-auto'>
+    <div className=''>
       <div className='flex justify-center space-x-4 align-items-center '>
         <div className='w-[20%]  bg-white rounded-md border-2 pl-2 '>
           <h4 className='border-b-2 text-md  py-1'>Categories</h4>
           <div>
-            {/* <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} /> */}
+            <ApSideMenu />
           </div>
         </div>
+
+
         <div className=' flex space-x-4 bg-white   align-items-center'>
           <div className="grid grid-cols-3 gap-12 p-1 ">
             {products?.map((item, index) => (

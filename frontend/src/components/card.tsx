@@ -1,10 +1,7 @@
 import React from "react";
-import { Card } from "antd";
 import Image from "next/image";
 import { TbCurrencyNaira } from "react-icons/tb";
-import { BsStarFill, BsStarHalf } from "react-icons/bs";
-import Link from "next/link";
-import { AiTwotoneStar } from "react-icons/ai";
+import { BsStarFill } from "react-icons/bs";
 
 interface IProps {
   name?: string;

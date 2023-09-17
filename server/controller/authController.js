@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const userSchema = require("../models/userSchema");
 const generateToken = require("../ultis/generateToken.js");
+const jwt = require("jsonwebtoken");
+
 
 const RegisterUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, mobile, password } = req.body;
@@ -51,7 +53,14 @@ const LogInUser = asyncHandler(async (req, res, next) => {
       res.status(404).send("User is not Found!");
     }
     if (User && (await User.matchPassword(password))) {
-      generateToken(res, User);
+      // generateToken(res, User);
+      const token = jwt.sign({ User }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "1d"
+      });
+      res.cookie("jwt", token);
+
+
+
       res.status(200).json({
         _id: User.id,
         email: User.email,
@@ -80,7 +89,7 @@ const CurrentUser = async (req, res) => {
 
   try {
 
-    const userId = req.params.id;
+    const userId = req.params.id.trim();
     console.log(userId)
     if (!userId) {
       // Handle case where ID is missing

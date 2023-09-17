@@ -20,7 +20,7 @@ export const Category = () => {
 
           <div className="flex gap-x-4">
             <li>
-              <Link href="">Phones</Link>
+              <Link href="/productList">Phones</Link>
             </li>
             <li>
               <Link href="">Accessorires</Link>

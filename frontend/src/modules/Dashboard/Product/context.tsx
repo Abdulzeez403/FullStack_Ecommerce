@@ -83,6 +83,7 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/product/${UserId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
+
       });
 
       if (!response.ok) {

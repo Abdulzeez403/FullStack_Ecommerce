@@ -1,16 +1,17 @@
 
 import React, { createContext, useContext, useState } from "react";
+import { IAuthSignUp } from "./model";
 
 
 interface IUser {
   user: any;
-  CurrentUser: (values: any, userId: any) => void;
+  CurrentUser: (userId: any) => void;
   LogOutUser: () => Promise<any>;
 }
 
 const UserContext = createContext<IUser>({
   user: null,
-  CurrentUser(values, userId) {
+  CurrentUser(userId) {
     return null;
   },
   LogOutUser() {
@@ -33,28 +34,38 @@ interface IProps {
 export const UserContextProvder: React.FC<IProps> = ({ children }) => {
 
 
-  const [user, setUser] = useState<any>({} as any);
+  const [user, setUser] = useState<IAuthSignUp>();
 
-  const CurrentUser = async (values: any, UserId: any) => {
+  const CurrentUser = async (UserId: any) => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/current/${UserId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/current/${UserId}`, {
         method: "GET",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify(values)
-      }
-      )
-        .then((data) => {
-          setUser(data)
+      });
 
-        });
+      if (!response.ok) {
+        throw new Error("Failed to fetch user data");
+      }
+      const userData = await response.json();
+
+      setUser(userData);
+    } catch (err) {
+      console.error("An error occurred:", err);
+    }
+  };
+
+
+  const LogOutUser = async () => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/logout`, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      })
     } catch (err) {
       console.log(err);
 
     };
-  };
 
-  const LogOutUser = async () => {
-    // return removeCookie("userId");
   };
 
   return (

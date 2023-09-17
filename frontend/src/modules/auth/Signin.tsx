@@ -5,8 +5,8 @@ import router from 'next/router';
 import { toast } from 'react-toastify';
 import { IAuthSignIn } from './model';
 import Link from 'next/link';
-import useCookies from "../../components/hooks/cookies"
 import Cookies from "universal-cookie"
+import axios from 'axios';
 
 
 const SignIn: React.FC = () => {
@@ -16,24 +16,43 @@ const SignIn: React.FC = () => {
 
   const onFinish = async (user: IAuthSignIn) => {
     setLoading(true);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/login`
-        , {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user),
-        });
-      setLoading(false);
-      const data = await res.json();
-      cookies.set("userId", data?._id)
+    //   try {
+    //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/user/login`
+    //       , {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(user),
 
-      router.push("/");
-      toast.success("Login Successfully");
+
+    //       });
+    //     setLoading(false);
+    //     const data = await res.json();
+    //     cookies.set("userId", data?._id)
+
+    //     router.push("/");
+    //     toast.success("Login Successfully");
+    //   } catch (err) {
+    //     toast.error("Error Occurred!");
+    //   }
+    // };
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/user/login`,
+        user,
+        { withCredentials: true }
+      );
+
+      setLoading(false);
+
+      const data = response.data;
+      cookies.set('userId', data?._id);
+      router.push('/');
+      toast.success('Login Successfully');
     } catch (err) {
-      toast.error("Error Occurred!");
+      toast.error('Error Occurred!');
     }
   };
-
 
   return (
     <div className='py-10'>

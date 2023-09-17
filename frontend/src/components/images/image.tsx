@@ -6,7 +6,7 @@ interface IProps {
     alt: string;
     width?: number;
     height?: number;
-    className?: any
+    className?: any;
 }
 
 const ApImage: React.FC<IProps> = ({ imgUrl, alt, width = 2000, height = 1500, className }) => {

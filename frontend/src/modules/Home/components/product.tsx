@@ -34,7 +34,7 @@ export const Product: React.FC<IProps> = ({ products }) => {
 
 
       <div className="flex gap-x-2 md:w-[40rem] md:overflow-auto lg:w-[80rem] lg:overflow-auto ">
-        {products?.map((item) => (
+        {products?.map((item, index) => (
           <div className="rounded-md " >
             <div key={item?._id} className="relative ">
               <ProductCard

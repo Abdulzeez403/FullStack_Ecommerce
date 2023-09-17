@@ -69,7 +69,6 @@ const DeleteProduct = async (req, res) => {
 
 };
 
-
 const GetProducts = async (req, res) => {
 
   try {

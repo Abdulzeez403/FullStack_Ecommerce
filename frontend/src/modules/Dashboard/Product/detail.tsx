@@ -21,6 +21,7 @@ export const DetailPage = () => {
   const { user, CurrentUser } = useUserContext();
 
 
+
   useEffect(() => {
     GetProduct(user?._id);
     console.log(user?._id, "UserId..");

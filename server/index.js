@@ -8,11 +8,15 @@ const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
 
+app.use(cors({
+  origin: ["http://localhost:5000", "http://localhost:5500"],
+  methods: ["POST", "GET", "PUT"],
+  credentials: true
+}));
+app.use(cookieParser());
 
-app.use(cors());
 app.use(errorMiddleware);
 app.use(express.json({ extend: true }));
-app.use(cookieParser());
 app.use("/api/user", require("./routes/authRoutes"));
 app.use("/api/test", require("./routes/test"));
 app.use("/api", require("./routes/productRoute"));

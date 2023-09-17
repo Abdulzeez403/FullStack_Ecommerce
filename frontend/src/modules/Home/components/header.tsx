@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Space, Dropdown, Input } from "antd";
 import {
   DownOutlined,
-  SmileOutlined,
   UserOutlined,
   QuestionCircleOutlined,
   ShoppingCartOutlined,
@@ -11,16 +10,14 @@ import type { MenuProps } from "antd";
 import { BsPersonGear, BsSearch } from "react-icons/bs";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useUserContext } from "@/modules/auth/UserContext";
-
 import Cookies from "universal-cookie";
 
 
 
 export const Header = () => {
 
-
-  const { LogOutUser, user, CurrentUser } = useUserContext();
   const cookies = new Cookies();
+  const { LogOutUser, user, CurrentUser } = useUserContext();
   const [userCurrent, setUserCurrent] = useState()
   const items: MenuProps["items"] = [
     {
@@ -47,19 +44,12 @@ export const Header = () => {
     {
       key: "2",
       label: (
-        <a
-          target="_self"
-          rel="noopener noreferrer"
-          href="
-          "
-        >
-          <div className="flex space-x-2 items-center"
-            onClick={() => { ClearCookies() }} >
-            <AiOutlinePoweroff size={20} />
-            <h4>SignOut</h4>
+        <div className="flex space-x-2 items-center"
+          onClick={() => { ClearCookies() }} >
+          <AiOutlinePoweroff size={20} />
+          <h4>SignOut</h4>
 
-          </div>
-        </a>
+        </div>
 
       ),
 
@@ -88,18 +78,26 @@ export const Header = () => {
   ];
 
   useEffect(() => {
-    const getCookies = cookies.get("userId")
-    setUserCurrent(getCookies)
-    // CurrentUser(userCurrent);
-    console.log("userId:", userCurrent)
+    const CurrentUserFunc = () => {
+      const getCookies = cookies.get("userId")
+      CurrentUser(getCookies);
+      setUserCurrent(getCookies)
+    };
+    CurrentUserFunc()
 
+    console.log("data", user)
   }, [])
 
-  const ClearCookies = () => {
-    // LogOutUser();
-    cookies.remove("userId")
 
+
+
+
+  const ClearCookies = () => {
+    LogOutUser();
+    cookies.remove("userId")
+    cookies.remove("jwt", { path: '/' })
   }
+
 
 
   return (
@@ -148,9 +146,7 @@ export const Header = () => {
                   <UserOutlined style={{ fontSize: 20 }} />
                   <div className=" hidden md:flex md:items-center lg:flex lg:items-center">
 
-                    <h4 className="font-semibold"> {userCurrent ? "Account" : `
-                    Hi, ${user?.firstName}
-                    `}</h4>
+                    <h4 className="font-semibold"> {userCurrent ? `Hi, ${user?.firstName}` : "Account"}</h4>
                     <DownOutlined style={{ fontSize: 15 }} />
                   </div>
                 </div>
