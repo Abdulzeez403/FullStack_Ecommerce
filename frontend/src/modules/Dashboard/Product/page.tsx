@@ -7,10 +7,8 @@ const ProductPage = () => {
 
   return (
     <div>
-      {
-        <DetailPage />
+      <DetailPage />
 
-      }
     </div>
   );
 };

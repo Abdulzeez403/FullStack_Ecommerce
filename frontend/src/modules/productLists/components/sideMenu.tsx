@@ -1,67 +1,52 @@
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
+import ApSideButton from '@/components/button/sidebutton'
+import { useProductContext } from '@/modules/Dashboard/Product/context';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-type MenuItem = Required<MenuProps>['items'][number];
+const ApSideMenu = () => {
+    const { GetProducts } = useProductContext()
+    const [filter, setFilter] = useState();
 
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: 'group',
-): MenuItem {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        type,
-    } as MenuItem;
-}
 
-const items: MenuProps['items'] = [
-    getItem('Clothes', 'sub1', <MailOutlined />, [
-        getItem('T-shirt', '5'),
-        getItem('Hoodie', '5'),
-        // getItem('Hoodie', 'g2', null, [getItem('Option 3', '3'), getItem('Option 4', '4')], 'group'),
-    ]),
+    useEffect(() => {
+        GetProducts(filter)
+    }, [filter])
 
-    getItem('Accessories', 'sub2', <AppstoreOutlined />, [
-        getItem('Phones', '5'),
-        getItem('LapTop', '6'),
-        getItem('Destop', '6'),
-        getItem('Electronic', '6'),
+    const handleButtonInput = (value: any) => {
+        setFilter(value);
+    }
 
-    ]),
 
-    { type: 'divider' },
 
-    getItem('BookStore', 'sub4', <SettingOutlined />, [
-        getItem('Rich Dad Poor Dad', '9'),
-        getItem('Unlimited Power', '10'),
-        getItem('Things fall apart', '11'),
-        getItem('The Arrow of gods', '12'),
-    ]),
-
-    getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
-];
-
-const ApSideMenu: React.FC = () => {
-    const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
-    };
 
     return (
-        <Menu
-            onClick={onClick}
-            style={{ width: 256 }}
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            mode="inline"
-            items={items}
-        />
-    );
-};
+        <div>
+            <div className="inline  ">
+                <Link href="" className="font-bold">
+                    <ApSideButton title="All categories"
+                        onclick={() => handleButtonInput("")} />
+                </Link>
 
-export default ApSideMenu;
+                <Link href={`?categories=${filter}`} className="font-bold">
+                    <ApSideButton title="Phones"
+                        onclick={() => handleButtonInput("Phones")} />
+                </Link>
+
+                <Link href={`?categories=${filter}`} className="font-bold">
+
+                    <ApSideButton title="T-Shirt"
+                        onclick={() => handleButtonInput("T-Shirt")} />
+                </Link>
+
+                <Link href={`?categories=${filter}`} className="font-bold">
+
+                    <ApSideButton title="ELectronic"
+                        onclick={() => handleButtonInput("ELectronic")} />
+                </Link>
+
+            </div>
+        </div>
+    )
+}
+
+export default ApSideMenu

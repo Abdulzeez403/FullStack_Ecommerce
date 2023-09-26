@@ -85,7 +85,6 @@ export const Header = () => {
     };
     CurrentUserFunc()
 
-    console.log("data", user)
   }, [])
 
 

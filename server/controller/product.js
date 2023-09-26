@@ -70,18 +70,37 @@ const DeleteProduct = async (req, res) => {
 };
 
 const GetProducts = async (req, res) => {
-
   try {
-    const getProducts = await productSchema.find();
+    const { category } = req.query;
+
+    let getProducts;
+
+    if (category) {
+      getProducts = await productSchema.find({
+        categories: { $in: [category] },
+      }).exec();
+    } else {
+      getProducts = await productSchema.find();
+    }
+
+    // Check if getProducts is null or undefined
     if (!getProducts) {
       return res.status(401).send("No Products found!");
     }
+
+    // Check if getProducts is an array and has a length property
+    if (Array.isArray(getProducts) && getProducts.length === 0) {
+      return res.status(404).json({ error: "No Products found!!" });
+    }
+
+    // Send the response after all checks
     res.status(200).send(getProducts);
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("An error occurred while fetching products.");
   }
 };
+
 
 const GetProductDetail = async (req, res) => {
   const { id } = req.params;
@@ -99,19 +118,22 @@ const GetProductDetail = async (req, res) => {
 const GetProduct = async (req, res) => {
   const userId = req.params.id;
   try {
-    // const user = await userSchema.find({ userId })
-    // console.log(user)
-    // if (!user) return res.status(401).json({ error: 'Unauthorized' })
-    const getProduct = await productSchema.find({ User: userId });
+    const user = await userSchema.find({ userId });
+
+    if (!user) {
+      res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const getProduct = await productSchema.find({ userId });
     if (!getProduct || getProduct.length === 0) {
       return res.status(401).send("No Products found!");
     }
     res.status(200).send(getProduct);
   } catch (error) {
-    1
     console.error("Error fetching products:", error);
     res.status(500).send("An error occurred while fetching products.");
   }
 }
+
 
 module.exports = { CreateProduct, GetProducts, UpdateProduct, DeleteProduct, GetProduct, GetProductDetail }

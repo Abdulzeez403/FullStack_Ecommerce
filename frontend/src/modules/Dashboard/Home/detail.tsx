@@ -1,11 +1,10 @@
 import React from 'react'
-import { DashboardNav } from '../Layout/dashboard';
 
 const DetailPage = () => {
     return (
-        <DashboardNav>
-            <div>HOme</div>
-        </DashboardNav>
+        <div>
+            <h4 className="text-center text-lg">We're coming soon</h4>
+        </div>
     )
 }
 

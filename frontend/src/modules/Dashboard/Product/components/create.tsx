@@ -1,48 +1,51 @@
 import {
-  ErrorMessage,
-  Field,
   Form,
   Formik,
-  FormikHelpers,
   FormikProps,
 } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useProductContext } from "../context";
 import { ApTextInput } from "@/components/input";
-import { IProduct } from "../models";
 import { UploadProps } from "antd";
 import { Files } from "@/components/input/files";
 import { ApSelectInput } from "@/components/input/SelectInput";
-import { useUserContext } from "@/modules/auth/UserContext";
+import Cookies from 'universal-cookie';
+
 
 
 
 export const CreatePost = () => {
   const [files, setFiles] = useState(null) as any;
-  const { CreateProduct } = useProductContext();
-  const { user, CurrentUser } = useUserContext();
-
+  const { CreateProduct, UpdateProduct,
+    product, GetProductDetailId } = useProductContext();
 
 
   const handleProductImage: UploadProps["onChange"] = ({
     fileList: newFileList,
   }: any) => {
-    console.log(newFileList, "newFIleListt");
     setFiles(newFileList);
   };
 
-  const handleSubmit = (values: any, UserId: any) => {
 
-    CreateProduct({
-      ...values,
-      images: files?.map((f: any) => ({
-        uri: f?.thumbUrl,
-        type: f?.type,
-        name: f?.name,
-      })),
-    }, user?._id)
-    CurrentUser();
-    console.log(user?._id, "UserID")
+  // GetProductDetailId("650b97fe60424a3e3d44bed0");
+
+  const handleSubmit = (values: any) => {
+    const cookies = new Cookies()
+    const userId = cookies.get("userId");
+    const productId = "650b97fe60424a3e3d44bed0";
+    console.log(productId)
+    if (productId) {
+      UpdateProduct({ ...values }, userId)
+    } else {
+      CreateProduct({
+        ...values,
+        images: files?.map((f: any) => ({
+          uri: f?.thumbUrl,
+          type: f?.type,
+          name: f?.name,
+        })),
+      }, userId)
+    }
 
   };
 
@@ -52,13 +55,11 @@ export const CreatePost = () => {
   return (
     <Formik
       initialValues={{
-        Product_name: "",
-        category: {
-          label: "T-Shirt",
-          value: "T-Shirt"
-        },
-        price: "",
-        description: "", color: "", soldout: "", quantity: ""
+        Product_name: product?.Product_name || "",
+        categories: product?.categories?.map((c) => c.value) || "",
+        price: product?.price || "",
+        description: product?.description || "",
+        color: product?.color || "", soldout: "", quantity: ""
       }}
       onSubmit={handleSubmit}
     >
@@ -80,16 +81,20 @@ export const CreatePost = () => {
 
 
           <ApSelectInput
-            label="Categories"
+            label="Category"
             name="categories"
             options={[
               {
-                label: "Shoe",
-                value: "Shoe",
+                label: "Phones",
+                value: "Phones",
               },
               {
                 label: "T-shirt",
                 value: "T-shirt",
+              },
+              {
+                label: "Electronic",
+                value: "Electronic",
               },
             ]}
             className="border w-[100%] p-2 rounded-md outline-0 hover:border-slate-600"

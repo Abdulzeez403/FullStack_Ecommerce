@@ -23,10 +23,10 @@ const ProductCard: React.FC<IProps> = ({
   proudctDetail,
   category
 }) => (
-  <div className="bg-white rounded-md w-[300px]" >
+  <div className="bg-white rounded-md w-[250px]" >
     <div>
-      <div className="bg-slate-300 w-[300px] flex-wrap">
-        <div className="w-[200px] mx-auto">
+      <div className="bg-slate-300 w-[250px] h-[200px] ">
+        <div className=" flex justify-center m-0 items-center">
           <Image src={img as any} width={200} height={200} alt="ProductImage" />
         </div>
 

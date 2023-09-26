@@ -10,8 +10,8 @@ router.get("/products/:id", GetProductDetail)
 
 router
     .route("/product/:id")
-    .post(CreateProduct)
     .get(GetProduct)
+    .post(CreateProduct)
     .put(UpdateProduct)
     .delete(DeleteProduct)
 

@@ -10,7 +10,7 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 
 app.use(cors({
   origin: ["http://localhost:5000", "http://localhost:5500"],
-  methods: ["POST", "GET", "PUT"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }));
 app.use(cookieParser());

@@ -30,42 +30,34 @@ export const DetailPage: React.FC = () => {
 
   return (
     <div className=''>
-      <div className='flex justify-center space-x-4 align-items-center '>
-        <div className='w-[20%]  bg-white rounded-md border-2 pl-2 '>
-          <h4 className='border-b-2 text-md  py-1'>Categories</h4>
+      <div className='flex justify-center space-x-2  align-items-center '>
+
+        <div className=' bg-white rounded-md border-2 pl-2 w-[13rem] '>
+          <h4 className='border-b-2 text-md  py-1 font-semibold'>Categories</h4>
           <div>
             <ApSideMenu />
           </div>
         </div>
 
 
-        <div className=' flex space-x-4 bg-white   align-items-center'>
-          <div className="grid grid-cols-3 gap-12 p-1 ">
+        <div className=' flex space-x-2 bg-white items-center '>
+          <div className="grid grid-cols-4 gap-x-6 p-1 ">
             {products?.map((item, index) => (
-              <div >
-                <div key={index} className="group relative ">
+              <div className="rounded-md " >
+                <div key={item?._id} className="relative ">
                   <ProductCard
                     img={item?.images[0]?.uri}
                     price={item?.price}
-                    oldPrice="2000"
+                    oldPrice="200"
                     name={item?.Product_name}
-                    category={item?.categories?.map((c) => c?.value)}
+                    category={item?.categories?.map((m) => m?.value)}
                   />
-                  <div className="absolute right-1 top-0 invisible group-hover:visible ">
+                  <div className="absolute left-1 top-0  ">
                     <Link href={`${item?._id}`}>
-                      <div className=" p-1 m-2 rounded-md border-[1px] border-gray-200">
-                        <AiOutlineEye size={22} color='gray' />
+                      <div className=" m-2 ">
+                        <AiOutlineHeart size={22} color='gray' />
                       </div>
                     </Link>
-
-                    <div className=" p-1 m-2 rounded-md border-[1px] border-gray-200">
-                      <AiOutlineHeart size={22} color='gray' />
-                    </div>
-                    <div className=" p-1 m-2 rounded-md border-[1px] border-gray-200">
-                      <AiOutlineLock size={22} color='gray' />
-
-                    </div>
-
                   </div>
                 </div>
               </div>

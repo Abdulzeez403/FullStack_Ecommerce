@@ -5,10 +5,13 @@ import ApImage from '@/components/images/image';
 import { IProduct } from '../models';
 
 interface IProps {
-    product: IProduct[]; // Assuming IProduct is an interface representing your product data
+    product: IProduct[]; // Assuming IProduct is an interface representing your 
+    handleModal: () => void;
+    handleDeleteProduct: () => void;
 }
 
-const ProductTable: React.FC<IProps> = ({ product }) => {
+const ProductTable: React.FC<IProps> = ({ product, handleModal, handleDeleteProduct }) => {
+
 
     const columns: ColumnsType<any> = [
         {
@@ -51,8 +54,8 @@ const ProductTable: React.FC<IProps> = ({ product }) => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <a>Edit</a>
-                    <a>Delete</a>
+                    <a onClick={() => handleModal()}>Edit</a>
+                    <a onClick={() => handleDeleteProduct()}>Delete</a>
                 </Space>
             ),
         },
