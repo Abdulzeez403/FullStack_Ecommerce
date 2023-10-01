@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { IProduct } from "./models";
 
 interface IProp {
+  loading: boolean;
   product: IProduct,
   products: IProduct[];
   CreateProduct: (values: IProduct, UserId: any) => Promise<void>;
@@ -16,6 +17,7 @@ interface IProp {
 }
 
 const ProductContext = createContext<IProp>({
+  loading: false,
   product: {} as any,
   products: [] || null,
   CreateProduct(values, UserId) {
@@ -46,24 +48,33 @@ interface IProps {
 export const ProductProvder: React.FC<IProps> = ({ children }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [product, setProduct] = useState<IProduct>({} as any);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const CreateProduct = async (values: any, UserId: any) => {
+    setLoading(true)
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/product/${UserId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/product/${UserId}`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify(values)
-      }
-      )
-        .then((data) => {
-          setProducts(data as any);
-          toast.success("Product Successfully");
-        });
-    } catch (err) {
-      console.log(err);
+        body: JSON.stringify(values),
+      });
+      setLoading(false)
 
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`Failed to create product: ${errorMessage}`);
+      }
+      const newData = await response.json();
+      setProducts([...products, newData]);
+      toast.success("Product Successfully Created");
+
+      return newData;
+    } catch (err) {
+      console.error("Error creating product:", err);
+      toast.error(err as any)
     }
   };
+
 
 
   // @Get all the products
@@ -119,9 +130,14 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
       }
 
       const data = await response.json();
-      setProducts(data);
+      if (data) {
+        products?.filter((q, i) => (q?._id === userId ? data : q));
+        toast.success("Product Updated!")
+
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error(error as any)
     }
   }
 
@@ -138,8 +154,8 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
       }
 
       const data = await response.json();
-      setProducts(data);
-      toast.success("`Product Deleted!")
+      toast.success("Product Deleted!")
+      setProducts(products?.filter((c, i) => c._id !== userId));
     } catch (error) {
       console.error("Error fetching data:", error);
       toast.error(error as any)
@@ -169,6 +185,7 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
+        loading,
         product,
         products,
         CreateProduct,

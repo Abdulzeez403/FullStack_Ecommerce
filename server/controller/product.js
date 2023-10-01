@@ -1,5 +1,4 @@
 
-const asyncHandler = require("express-async-handler");
 const { mapFiles } = require("../middleware/file");
 const productSchema = require("../models/productSchema")
 const userSchema = require("../models/userSchema")
@@ -60,7 +59,7 @@ const UpdateProduct = async (req, res) => {
 const DeleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteProduct = await productSchema.findByIdAndDelete(id)
+    const deleteProduct = await productSchema.findByIdAndRemove(id)
     res.status(200).json({ success: true, message: 'Deleted created successfully', product: deleteProduct });
   } catch (error) {
     res.json({ success: false, error })

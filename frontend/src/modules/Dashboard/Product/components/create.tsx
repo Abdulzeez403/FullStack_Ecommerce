@@ -10,14 +10,28 @@ import { UploadProps } from "antd";
 import { Files } from "@/components/input/files";
 import { ApSelectInput } from "@/components/input/SelectInput";
 import Cookies from 'universal-cookie';
+import { IProduct } from "../models";
+import * as Yup from "yup";
+
+interface IProps {
+  product: IProduct;
+  onDismiss: () => void;
+}
+
+let FormSchema = Yup.object().shape({
+  Product_name: Yup.string().required("Product_name is required"),
+  // categories: Yup.string().required("categories is required"),
+  price: Yup.string().required("Price is required"),
+  // description: Yup.string().required("Product_name is required"),
+
+});
 
 
 
 
-export const CreatePost = () => {
+export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
   const [files, setFiles] = useState(null) as any;
-  const { CreateProduct, UpdateProduct,
-    product, GetProductDetailId } = useProductContext();
+  const { loading, CreateProduct, UpdateProduct, } = useProductContext();
 
 
   const handleProductImage: UploadProps["onChange"] = ({
@@ -27,15 +41,18 @@ export const CreatePost = () => {
   };
 
 
-  // GetProductDetailId("650b97fe60424a3e3d44bed0");
-
   const handleSubmit = (values: any) => {
     const cookies = new Cookies()
     const userId = cookies.get("userId");
-    const productId = "650b97fe60424a3e3d44bed0";
-    console.log(productId)
-    if (productId) {
-      UpdateProduct({ ...values }, userId)
+
+    if (product?._id) {
+      const payload = { ...values };
+      const id = product?._id;
+      UpdateProduct(payload, id).then(() => {
+        if (onDismiss) {
+          onDismiss();
+        }
+      })
     } else {
       CreateProduct({
         ...values,
@@ -44,7 +61,11 @@ export const CreatePost = () => {
           type: f?.type,
           name: f?.name,
         })),
-      }, userId)
+      }, userId).then(() => {
+        if (onDismiss) {
+          onDismiss();
+        }
+      })
     }
 
   };
@@ -56,11 +77,12 @@ export const CreatePost = () => {
     <Formik
       initialValues={{
         Product_name: product?.Product_name || "",
-        categories: product?.categories?.map((c) => c.value) || "",
+        categories: product?.categories?.map((c) => c?.value) || "",
         price: product?.price || "",
         description: product?.description || "",
         color: product?.color || "", soldout: "", quantity: ""
       }}
+      validationSchema={FormSchema}
       onSubmit={handleSubmit}
     >
       {(props: FormikProps<any>) => (
@@ -117,7 +139,7 @@ export const CreatePost = () => {
             type="submit"
             className="text-white bg-blue-500 rounded-md  px-10   my-6"
           >
-            Submit
+            {product?._id ? loading ? "Loading" : "Update Product" : loading ? "Loading" : "Add Product"}
           </button>
 
 
