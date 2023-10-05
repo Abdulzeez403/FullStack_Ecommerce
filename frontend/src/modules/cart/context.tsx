@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { IProduct } from "../Home/models";
+import { ICart } from "./model";
 
 interface IProp {
 
@@ -39,7 +39,7 @@ interface IProps {
 
 export const CartProvider: React.FC<IProps> = ({ children }) => {
     const [cart, setCart] = useState({} as any);
-    const [carts, setCarts] = useState<IProduct[]>([]);
+    const [carts, setCarts] = useState<ICart[]>([]);
     const [loading, setLoading] = useState(false)
 
     const addCart = async (payload: any) => {
@@ -76,7 +76,8 @@ export const CartProvider: React.FC<IProps> = ({ children }) => {
             }
 
             const data = await response.json();
-            setCarts(data);
+            setCarts(data?.data);
+
         } catch (error) {
             console.error("Error fetching data:", error);
         }

@@ -16,12 +16,14 @@ interface IProps {
 
 export const DetailPage: React.FC<IProps> = ({ productId }) => {
     const cookies = new Cookies();
+    const userId = cookies.get("userId");
+
     const { loading, addCart } = useCartContext();
     const handleSubmit = (values: any) => {
-        const userId = cookies.get("userId");
+
         addCart({
             product: {
-                id: productId?._id,
+                _id: productId?._id,
                 quantity: values.quantity,
             },
             userId,

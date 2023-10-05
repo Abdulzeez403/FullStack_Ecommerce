@@ -2,44 +2,44 @@
 import React from 'react';
 import { Space } from 'antd';
 import ApImage from '@/components/images/image';
-import { IProduct } from '../Home/models';
+import { ICart } from './model';
 
 interface IProps {
-    cart: IProduct;
+    cart: ICart;
 }
 
 
 export const Cartlist: React.FC<IProps> = ({ cart }) => {
-    console.log(cart, "cart.........")
+
+    const cartLabel = cart?.product?.product;
 
 
     return (
         <div>
-            <h4>{cart?._id}</h4>
-            {/* <Space className="flex justify-between items-center border-b py-4">
+            <Space className="flex justify-between items-center border-b py-4">
                 <Space className="flex gap-4 items-center">
                     <Space className="w-20 h-20">
-                        <ApImage
-                        src={cart?.product?.product?.images[0]?.uri}
-                        alt={cart?.product?.product?.images[0]?.name}
-                        className="w-full h-full object-contain"
-                    />
+                        {cart && cartLabel?.images && cartLabel?.images[0] && (
+                            <ApImage imgUrl={cartLabel?.images[0].uri}
+                                className="w-ful h-full object-contain"
+                                alt="cartimage" />
+                        )}
                     </Space>
                     <div>
                         <p className="capitalize font-semibold">
-                            {cart?._id}
+                            {cartLabel?.Product_name}
                         </p>
                         <p className="p-gray-600">
-                            {cart?.product?.quantity}
+                            {cartLabel?.quantity}
                         </p>
                     </div>
                 </Space>
                 <Space>
-                <p className="p-gray-400">
-                    {helper.toCurrency(parseFloat(cart?.product?.product?.price))}
-                </p>
+                    <p className="p-gray-400">
+                        {cartLabel?.price}
+                    </p>
+                </Space>
             </Space>
-            </Space> */}
         </div>
 
     );
