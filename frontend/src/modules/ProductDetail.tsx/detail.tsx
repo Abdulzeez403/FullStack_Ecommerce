@@ -2,32 +2,30 @@ import React, { useState } from 'react'
 import Image from "next/image"
 import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { TbCurrencyNaira } from 'react-icons/tb'
-import { useCartContext } from './context'
+import { useCartContext } from '../cart/context'
 import { Form, Formik, FormikProps } from 'formik'
 import { ApTextInput } from '@/components/input'
-import { useUserContext } from '../auth/UserContext'
 import { IProduct } from '../Home/models'
+import Cookies from 'universal-cookie'
 
 
 interface IProps {
-    productId: IProduct
+    productId: IProduct;
 }
 
 
 export const DetailPage: React.FC<IProps> = ({ productId }) => {
-    const { loading, cart, addCart, getCart } = useCartContext();
-    const { user, CurrentUser } = useUserContext()
+    const cookies = new Cookies();
+    const { loading, addCart } = useCartContext();
     const handleSubmit = (values: any) => {
-        CurrentUser()
-        const userId = user?._id
+        const userId = cookies.get("userId");
         addCart({
-            userId,
             product: {
                 id: productId?._id,
-                quantity: values.quantity
-            }
+                quantity: values.quantity,
+            },
+            userId,
         });
-        console.log(user?._id)
     }
 
     return (
@@ -101,6 +99,5 @@ export const DetailPage: React.FC<IProps> = ({ productId }) => {
 
             </div>
         </div>
-
     )
 }

@@ -1,13 +1,13 @@
-import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { IProduct } from "../Home/models";
 
 interface IProp {
 
     loading: boolean,
     cart: any,
     carts: any[],
-    addCart: (userId: any) => void,
+    addCart: (payload: any) => void,
     getCart: (userId: any) => void
 
 }
@@ -15,8 +15,8 @@ interface IProp {
 const CartContext = createContext<IProp>({
     loading: false,
     cart: {} as any,
-    carts: [],
-    addCart(userId) {
+    carts: [] || null,
+    addCart(payload) {
         return null as any;
     },
     getCart(userId) {
@@ -39,17 +39,18 @@ interface IProps {
 
 export const CartProvider: React.FC<IProps> = ({ children }) => {
     const [cart, setCart] = useState({} as any);
-    const [carts, setCarts] = useState<[]>([]);
+    const [carts, setCarts] = useState<IProduct[]>([]);
     const [loading, setLoading] = useState(false)
 
-    const addCart = async (UserId: any) => {
+    const addCart = async (payload: any) => {
         setLoading(true);
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/cart`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" }
-            });
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
 
+            });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

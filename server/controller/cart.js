@@ -5,9 +5,14 @@ const productSchema = require("../models/productSchema");
 const addCart = async (req, res) => {
     try {
         const { userId, product } = req.body;
-        const { id, quantity } = product;
+        const { _id, quantity } = product;
 
-        const productItem = await productSchema.findById(id);
+        console.log('Received userId:', userId);
+        console.log('Received product:', product);
+        console.log('Destructured id:', _id);
+        console.log('Destructured quantity:', quantity);
+
+        const productItem = await productSchema.findById(_id);
         const cartProduct = new cartSchema({
             userId,
             product: {
@@ -17,7 +22,7 @@ const addCart = async (req, res) => {
         });
 
         const cart = await cartProduct.save();
-        return res.json({ success: true, message: 'Product created successfully', data: cart });
+        return res.json({ success: true, message: 'Add-to-cart created successfully', data: cart });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: 'Internal server error' });
@@ -30,7 +35,7 @@ const getUserCart = async (req, res) => {
     const userId = req.params.id;
     try {
         const cart = await cartSchema.find({ userId: userId }).exec();
-        res.json({ success: true, message: 'Get created successfully', data: cart });
+        res.json({ success: true, message: 'Get user carts', data: cart });
     } catch (errors) {
         res.json({ success: false, errors });
         console.log(errors)
@@ -43,7 +48,7 @@ const updateCart = async (req, res) => {
     const body = req.body;
     try {
         const cart = await cartSchema.findByIdAndUpdate(id, body, { new: true });
-        res.json({ success: true, message: 'updated successfully', data: cart });
+        res.json({ success: true, message: 'cart updated', data: cart });
     } catch (errors) {
         res.json({ success: false, errors });
         console.log(errors);
@@ -55,7 +60,7 @@ const deleteCart = async (req, res) => {
     const { id } = req.params;
     try {
         const cart = await cartSchema.findByIdAndDelete(id);
-        res.json({ success: true, message: 'Deleted successfully', data: cart });
+        res.json({ success: true, message: 'Cart Deleted', data: cart });
 
     } catch (errors) {
         res.json({ success: false, errors });
@@ -66,7 +71,7 @@ const deleteCart = async (req, res) => {
 const getAllCart = async (req, res) => {
     try {
         const cart = await cartSchema.find();
-        res.json({ success: true, message: 'GetAllChart successfully', data: cart });
+        res.json({ success: true, message: 'Get All Cart successfully', data: cart });
     } catch (errors) {
         res.json({ success: false, errors });
         console.log(errors);
