@@ -9,6 +9,7 @@ interface IProp {
     carts: any[],
     addCart: (payload: any) => void,
     getCart: (userId: any) => void
+    deleteCart: (id: any) => void
 
 }
 
@@ -21,6 +22,10 @@ const CartContext = createContext<IProp>({
     },
     getCart(userId) {
         return null as any;
+    },
+    deleteCart(id) {
+        return null as any;
+
     }
 
 });
@@ -83,9 +88,30 @@ export const CartProvider: React.FC<IProps> = ({ children }) => {
         }
     };
 
+    const deleteCart = async (id: any) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/cart/${id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            toast.success("Cart Deleted!")
+            setCarts(carts?.filter((c, i) => c._id !== id));
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            toast.error(error as any)
+        }
+    }
+
     return (
         <CartContext.Provider value={{
-            loading, cart, carts, addCart, getCart
+            loading, cart, carts, addCart, getCart, deleteCart
         }} >
             {children}
         </CartContext.Provider>

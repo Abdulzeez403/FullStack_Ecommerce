@@ -7,6 +7,8 @@ interface IProps {
   name: string;
   className?: string;
   placeHolder?: string;
+  value?: any;
+
   // onChange?:(value:string)=>void;
   props?: {
     [x: string]: any;
@@ -20,6 +22,7 @@ export const ApTextInput: React.FC<IProps> = ({
   name,
   className,
   placeHolder,
+  value,
   containerClass,
   ...props
 }) => {
@@ -82,6 +85,7 @@ export const ApTextInput: React.FC<IProps> = ({
         
           ${className}`}
           placeholder={placeHolder}
+          value={value}
         />
       )}
       {meta.touched && meta.error && (

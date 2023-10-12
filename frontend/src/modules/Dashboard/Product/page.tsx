@@ -26,14 +26,9 @@ const ProductPage = () => {
     show: false,
     type: "Create Product"
   });
-
-
-
-
   const handleCreateProduct = () => {
     setModal({ show: true, data: null, type: "Create Product" });
   }
-
   const handleViewDetail = (product: IProduct) => {
     setModal({ show: true, data: product, type: "Update Product" });
   };

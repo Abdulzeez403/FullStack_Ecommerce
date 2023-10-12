@@ -6,20 +6,18 @@ import { UserContextProvder } from "@/modules/auth/UserContext";
 import { CartProvider } from "@/modules/cart/context";
 
 
+
 export default function App({ Component, pageProps }: AppProps) {
+
   return (
 
     <UserContextProvder>
-      {/* <ProductContextProvder> */}
       <ProductProvder>
         <CartProvider>
           <Component {...pageProps} />
           <Notification />
         </CartProvider>
-
       </ProductProvder>
-      {/* </ProductContextProvder> */}
-
     </UserContextProvder>
   );
 }

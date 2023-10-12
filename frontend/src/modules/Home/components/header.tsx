@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Space, Dropdown, Input } from "antd";
+import { Button, Space, Dropdown, Input, Badge } from "antd";
 import {
   DownOutlined,
   UserOutlined,
@@ -11,14 +11,19 @@ import { BsPersonGear, BsSearch } from "react-icons/bs";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useUserContext } from "@/modules/auth/UserContext";
 import Cookies from "universal-cookie";
+import { useCartContext } from "@/modules/cart/context";
+
+interface IProps {
+  cartModal: () => void;
+}
 
 
-
-export const Header = () => {
+export const Header: React.FC<IProps> = ({ cartModal }) => {
 
   const cookies = new Cookies();
   const { LogOutUser, user, CurrentUser } = useUserContext();
-  const [userCurrent, setUserCurrent] = useState()
+  const [userCurrent, setUserCurrent] = useState();
+  const { carts } = useCartContext()
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -172,9 +177,16 @@ export const Header = () => {
 
           <button>
             <div className="flex gap-x-2 items-center  hover:text-yellow-500 focus:border-2" >
-              <ShoppingCartOutlined style={{ fontSize: 20 }} />
+              <Badge count={carts?.length == 0 ? <h4>0</h4> : carts.length}>
+
+                <ShoppingCartOutlined style={{ fontSize: 20 }} />
+              </Badge>
+
               <div className=" hidden md:flex md:items-center lg:flex lg:items-center">
-                <h4 className="font-semibold">Chart</h4>
+                <h4 className="font-semibold" onClick={() => cartModal()}>
+                  Chart
+                </h4>
+
               </div>
 
             </div>

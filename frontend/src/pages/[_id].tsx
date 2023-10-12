@@ -26,8 +26,6 @@ export const getServerSideProps = async ({
 
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ROUTE}/products/${_id}`);
   const data = res.data;
-  console.log(data)
-
   if (!data) {
     return {
       notFound: true,

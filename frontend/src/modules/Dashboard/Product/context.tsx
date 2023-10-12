@@ -7,7 +7,7 @@ interface IProp {
   product: IProduct,
   products: IProduct[];
   CreateProduct: (values: IProduct, UserId: any) => Promise<void>;
-  GetProducts: (categories: any) => void;
+  GetProducts: (categories?: any) => void;
   GetProduct: (value?: any) => void;
   GetProductDetailId: (id: any) => void;
 

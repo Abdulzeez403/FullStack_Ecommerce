@@ -5,11 +5,30 @@ import { AiOutlineEye, AiOutlineHeart, AiOutlineLock, AiTwotoneStar } from "reac
 import { IProduct } from "../models";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import ApTextHeader from "@/components/typography/header";
+import { useCartContext } from "@/modules/cart/context";
+import Cookies from "universal-cookie";
 
 interface IProps {
   products: IProduct[]
 }
 export const Product: React.FC<IProps> = ({ products }) => {
+
+
+  const { addCart } = useCartContext();
+  const cookies = new Cookies();
+  const userId = cookies.get("userId");
+
+  const handleAddsToCart = (id: any, quantity: any) => {
+    addCart({
+      product: {
+        _id: id,
+        quantity: quantity
+      },
+      userId,
+    })
+
+  }
+
 
 
   return (
@@ -43,6 +62,7 @@ export const Product: React.FC<IProps> = ({ products }) => {
                 oldPrice="200"
                 name={item?.Product_name}
                 category={item?.categories?.map((m) => m?.value)}
+                addToCart={() => handleAddsToCart(item?._id, item?.quantity)}
               />
               <div className="absolute left-1 top-0  ">
                 <Link href={`${item?._id}`}>

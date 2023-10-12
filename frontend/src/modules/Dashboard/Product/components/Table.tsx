@@ -88,7 +88,6 @@ const ProductTable: React.FC<IProps> = ({ product, handleModal, }) => {
 
                 <AppConfirm onConfirm={handleDeleteProduct}>
                     <button className="py-1 px-4 bg-red-500 rounded-md text-white"
-                    // onClick={handleDeleteProduct}
                     >Delete</button>
 
                 </AppConfirm>

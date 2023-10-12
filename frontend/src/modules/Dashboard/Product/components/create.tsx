@@ -19,9 +19,9 @@ interface IProps {
 }
 
 let FormSchema = Yup.object().shape({
-  Product_name: Yup.string().required("Product_name is required"),
+  // Product_name: Yup.string().required("Product_name is required"),
   // categories: Yup.string().required("categories is required"),
-  price: Yup.string().required("Price is required"),
+  // price: Yup.string().required("Price is required"),
   // description: Yup.string().required("Product_name is required"),
 
 });
@@ -39,6 +39,8 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
   }: any) => {
     setFiles(newFileList);
   };
+
+
 
 
   const handleSubmit = (values: any) => {
@@ -76,7 +78,7 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
   return (
     <Formik
       initialValues={{
-        Product_name: product?.Product_name || "",
+        product_name: product?.Product_name || "",
         categories: product?.categories?.map((c) => c?.value) || "",
         price: product?.price || "",
         description: product?.description || "",
@@ -90,13 +92,13 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
           <ApTextInput
             type="text"
             label="Name"
-            name="Product_name"
+            name="product_name"
             className=" p-2 rounded-md outline-0 border hover:bg-white  "
           />
 
           <ApTextInput
             type="text"
-            label="Price"
+            label="Price.."
             name="price"
             className=" p-2 rounded-md outline-0 border hover:bg-white"
           />

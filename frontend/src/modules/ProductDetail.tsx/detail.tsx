@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Image from "next/image"
-import { BsStarFill, BsStarHalf } from 'react-icons/bs'
+import { BsFillPlusSquareFill, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { TbCurrencyNaira } from 'react-icons/tb'
 import { useCartContext } from '../cart/context'
 import { Form, Formik, FormikProps } from 'formik'
 import { ApTextInput } from '@/components/input'
 import { IProduct } from '../Home/models'
 import Cookies from 'universal-cookie'
+import { AiFillMinusSquare } from 'react-icons/ai'
 
 
 interface IProps {
@@ -17,10 +18,10 @@ interface IProps {
 export const DetailPage: React.FC<IProps> = ({ productId }) => {
     const cookies = new Cookies();
     const userId = cookies.get("userId");
+    let [counter, setCounter] = useState(0)
 
     const { loading, addCart } = useCartContext();
     const handleSubmit = (values: any) => {
-
         addCart({
             product: {
                 _id: productId?._id,
@@ -65,8 +66,9 @@ export const DetailPage: React.FC<IProps> = ({ productId }) => {
                                 <h4 className="font-thin text-md"> 2000</h4>
                             </div>
                         </div>
-                        ``
-                        <div>
+
+                        <div >
+
                             <Formik
                                 initialValues={{
                                     quantity: ""
@@ -75,15 +77,29 @@ export const DetailPage: React.FC<IProps> = ({ productId }) => {
                             >
                                 {(props: FormikProps<any>) => (
                                     <Form className=" ">
-                                        <ApTextInput
-                                            type="number"
-                                            name="quantity"
-                                            className=" p-2 rounded-md outline-0 border hover:bg-white  "
-                                        />
+
+                                        <div className="flex space-x-2 items-center">
+
+                                            <div>
+                                                <BsFillPlusSquareFill size={30} onClick={() => setCounter(counter++)} />
+                                            </div>
+                                            <ApTextInput
+                                                type="number"
+                                                name="quantity"
+                                                className="  rounded-md outline-0 border hover:bg-white w-[3.4rem] "
+                                                value={counter}
+                                            />
+
+                                            <div><AiFillMinusSquare size={35}
+                                                onClick={() => setCounter(counter--)} /></div>
+                                        </div>
+
+
                                         <button className='my-2 bg-yellow-600 text-white rounded-md px-4 py-2 w-96' type='submit'>{loading ? "Loading..." : "Add to Cart"}</button>
                                     </Form>
                                 )}
                             </Formik>
+
                         </div>
 
 

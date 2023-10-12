@@ -5,10 +5,10 @@ export interface IProduct {
   images?: IImage[];
   description?: string;
   categories?: ICategory[];
-  price?: string;
+  price?: any;
   color?: string;
   soldout?: boolean;
-  quantity: string;
+  quantity: any;
 }
 
 interface ICategory {

@@ -14,7 +14,6 @@ export const CartDetailPage = () => {
         const userId = cookies.get("userId");
         getCart(userId)
     }, [])
-    console.log(carts, "carts....")
     return (
 
         <div>
@@ -22,6 +21,7 @@ export const CartDetailPage = () => {
                 {carts?.map((m: ICart, i: any) => (
                     <Cartlist cart={m} key={i} />
                 ))}
+
             </div>
         </div>
 

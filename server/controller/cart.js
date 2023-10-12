@@ -6,12 +6,6 @@ const addCart = async (req, res) => {
     try {
         const { userId, product } = req.body;
         const { _id, quantity } = product;
-
-        console.log('Received userId:', userId);
-        console.log('Received product:', product);
-        console.log('Destructured id:', _id);
-        console.log('Destructured quantity:', quantity);
-
         const productItem = await productSchema.findById(_id);
         const cartProduct = new cartSchema({
             userId,
@@ -59,8 +53,8 @@ const updateCart = async (req, res) => {
 const deleteCart = async (req, res) => {
     const { id } = req.params;
     try {
-        const cart = await cartSchema.findByIdAndDelete(id);
-        res.json({ success: true, message: 'Cart Deleted', data: cart });
+        const cart = await cartSchema.findByIdAndRemove(id);
+        res.status(200).json({ success: true, message: 'Cart Deleted', data: cart });
 
     } catch (errors) {
         res.json({ success: false, errors });
