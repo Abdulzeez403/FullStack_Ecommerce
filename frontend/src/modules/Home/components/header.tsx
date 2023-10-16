@@ -12,6 +12,8 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import { useUserContext } from "@/modules/auth/UserContext";
 import Cookies from "universal-cookie";
 import { useCartContext } from "@/modules/cart/context";
+import { useProductContext } from "@/modules/Dashboard/Product/context";
+import Link from "next/link";
 
 interface IProps {
   cartModal: () => void;
@@ -23,6 +25,7 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
   const cookies = new Cookies();
   const { LogOutUser, user, CurrentUser } = useUserContext();
   const [userCurrent, setUserCurrent] = useState();
+  const [searchValue, setSearchValue] = useState<string>();
   const { carts } = useCartContext()
   const items: MenuProps["items"] = [
     {
@@ -82,6 +85,16 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
 
   ];
 
+  const { GetProducts } = useProductContext()
+
+  const onSearch = () => {
+    GetProducts(searchValue)
+  }
+
+
+  const handleInputChange = (e: any) => {
+    setSearchValue(e.target.value);
+  };
   useEffect(() => {
     const CurrentUserFunc = () => {
       const getCookies = cookies.get("userId")
@@ -89,7 +102,6 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
       setUserCurrent(getCookies)
     };
     CurrentUserFunc()
-
   }, [])
 
 
@@ -107,17 +119,21 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
   return (
     <div className="bg-white py-4  px-[1rem] md:px-[2rem] lg:px-[10rem]">
       <div className="flex justify-between  items-center ">
-
         <div>
-          <h2 className="font-extrabold text-[1.3rem] md:text-[1.5rem] lg:text-[2rem] text-yellow-300 ">
-            CityStore
-          </h2>
-          <div className="hidden md:block md:text-[.6rem] lg:block   
-          lg:text-[.9rem]">
-            <p>Buying the right stuff</p>
+          <Link href="/">
 
-          </div>
+            <h2 className="font-extrabold text-[1.3rem] md:text-[1.5rem] lg:text-[2rem] text-yellow-300 ">
+              CityStore
+            </h2>
+            <div className="hidden md:block md:text-[.6rem] lg:block   
+          lg:text-[.9rem]">
+              <p>Buying the right stuff</p>
+
+            </div>
+          </Link>
+
         </div>
+
 
         <div className="hidden md:flex lg:flex ">
           <div className="w-[30rem] md:w-[20rem] lg:w-[30rem]">
@@ -127,12 +143,16 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
               allowClear={false}
               className="w-[100%] rounded-r-none"
               prefix={<BsSearch color="gray" />}
+              value={searchValue}
+              onChange={handleInputChange}
             />
           </div>
           <Button
             type="primary"
             size="large"
             className="bg-black text-white font-semibold rounded-l-none p-x-2 "
+            onClick={() => onSearch()}
+
           >
             <BsSearch color="white" size={20} />
 
@@ -175,15 +195,14 @@ export const Header: React.FC<IProps> = ({ cartModal }) => {
             </a>
           </Dropdown>
 
-          <button>
+          <button onClick={() => cartModal()}>
             <div className="flex gap-x-2 items-center  hover:text-yellow-500 focus:border-2" >
-              <Badge count={carts?.length == 0 ? <h4>0</h4> : carts.length}>
-
+              <Badge count={carts?.length || 0}>
                 <ShoppingCartOutlined style={{ fontSize: 20 }} />
               </Badge>
 
               <div className=" hidden md:flex md:items-center lg:flex lg:items-center">
-                <h4 className="font-semibold" onClick={() => cartModal()}>
+                <h4 className="font-semibold" >
                   Chart
                 </h4>
 

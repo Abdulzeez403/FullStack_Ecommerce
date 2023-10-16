@@ -44,9 +44,10 @@ export const DetailPage: React.FC = () => {
         <div className=' flex space-x-2 bg-white items-center '>
           <div className="grid grid-cols-4 gap-x-6 p-1 ">
             {products?.map((item, index) => (
-              <Link href={`${item?._id}`}>
-                <div className="rounded-md " >
-                  <div key={item?._id} className="relative ">
+              <div className="rounded-md " >
+                <div key={item?._id} className="relative ">
+                  <Link href={`${item?._id}`}>
+
                     <ProductCard
                       img={item?.images[0]?.uri}
                       price={item?.price}
@@ -61,14 +62,15 @@ export const DetailPage: React.FC = () => {
                         userId,
                       })}
                     />
-                    <div className="absolute left-1 top-0  ">
-                      <div className=" m-2 ">
-                        <AiOutlineHeart size={22} color='gray' />
-                      </div>
+                  </Link>
+
+                  <div className="absolute left-1 top-0  ">
+                    <div className=" m-2 ">
+                      {/* <AiOutlineHeart size={22} color='gray' /> */}
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
 
             ))}
           </div>

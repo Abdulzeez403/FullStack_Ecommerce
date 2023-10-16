@@ -3,39 +3,71 @@ import React from "react";
 // import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { Space } from "antd";
+import Phone from "../../../../public/svg/phone.svg"
+import Health from "../../../../public/svg/health.svg"
+import Fashion from "../../../../public/svg/fashion.svg"
+import Electronics from "../../../../public/svg/electronics.svg"
+import Baby from "../../../../public/svg/bady.svg"
+import Applinance from "../../../../public/svg/applinance.svg"
 export const Category = () => {
   return (
-    <div className="my-1 px-[1rem] md:px-[8rem] lg:px-[10rem]">
-      <nav className="w-[400px] overflow-scroll  md:w-[100%] md:overflow-auto lg:w-[100%] lg:overflow-auto ">
-        <ul className="flex justify-between">
+    <div className="hidden  lg:block lg:w-[16rem] bg-white p-3 mr-2">
+      <nav className="">
+        <ul className="block justify-between">
           <div className="">
-            <li>
-              <Link href="/" className="flex space-x-3 items-center pr-4">
-                <h4> Categories</h4>
-                <AiOutlineMenuUnfold color="black" size={20} />
+            {/* <li>
+              <Link href="/" >
+                <Space>
+                  <AiOutlineMenuUnfold color="black" size={20} />
+                  <h4 className="text-md"> Categories</h4>
+                </Space>
+
               </Link>
-            </li>
+            </li> */}
 
           </div>
 
-          <div className="flex gap-x-4">
+          <div className="space-y-4 ">
             <li>
-              <Link href="/productList">Phones</Link>
+              <Space>
+                <Phone />
+                <Link href="/productList">Phones & Tablet</Link>
+              </Space>
             </li>
             <li>
-              <Link href="">Accessorires</Link>
+              <Space>
+                <Health />
+                <Link href="">Health & Beauty</Link>
+              </Space>
+
             </li>
             <li>
-              <Link href="">Clothings</Link>
+              <Space>
+                <Fashion />
+                <Link href="">Fashion</Link>
+              </Space>
+
             </li>
             <li>
-              <Link href="">Electronics</Link>
+              <Space>
+                <Electronics />
+                <Link href="">Electronics</Link>
+              </Space>
             </li>
             <li>
-              <Link href="">Babys</Link>
+              <Space>
+                <Baby />
+                <Link href="">Baby Product</Link>
+              </Space>
+
             </li>
             <li>
-              <Link href="">Fashions</Link>
+              <Space>
+                <Applinance />
+                <Link href="">Applinances</Link>
+              </Space>
+
             </li>
             <li>
             </li>

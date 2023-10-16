@@ -69,22 +69,24 @@ const DeleteProduct = async (req, res) => {
 
 const GetProducts = async (req, res) => {
   try {
-    const { category } = req.query;
+    const categories = req.query.categories;
+    console.log(categories)
 
     let getProducts;
 
-    if (category) {
+    if (categories) {
+
       getProducts = await productSchema.find({
-        categories: { $in: [category] },
+        categories: { $in: [categories] },
       }).exec();
     } else {
       getProducts = await productSchema.find();
     }
 
-    // Check if getProducts is null or undefined
-    if (!getProducts) {
-      return res.status(401).send("No Products found!");
-    }
+    // // Check if getProducts is null or undefined
+    // if (!getProducts) {
+    //   return res.status(401).send("No Products found!");
+    // }
 
     // Check if getProducts is an array and has a length property
     if (Array.isArray(getProducts) && getProducts.length === 0) {

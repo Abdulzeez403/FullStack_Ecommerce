@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const ApSideMenu = () => {
     const { GetProducts } = useProductContext()
-    const [filter, setFilter] = useState();
+    const [filter, setFilter] = useState('');
 
 
     useEffect(() => {
@@ -35,13 +35,13 @@ const ApSideMenu = () => {
                 <Link href={`?categories=${filter}`} className="font-bold">
 
                     <ApSideButton title="T-Shirt"
-                        onclick={() => handleButtonInput("T-Shirt")} />
+                        onclick={() => handleButtonInput("T-shirt")} />
                 </Link>
 
                 <Link href={`?categories=${filter}`} className="font-bold">
 
                     <ApSideButton title="ELectronic"
-                        onclick={() => handleButtonInput("ELectronic")} />
+                        onclick={() => handleButtonInput("Electronic")} />
                 </Link>
 
             </div>

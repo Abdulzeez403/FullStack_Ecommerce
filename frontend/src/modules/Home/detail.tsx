@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useProductContext } from "../Dashboard/Product/context";
 import { CarouselPage } from "./components/carousel";
-import TopProduct from "./components/topProduct";
-import { Product } from "./components/product";
-import { useProductContext } from "@/modules/Dashboard/Product/context";
+import { Category } from "./components/category";
+import { Product } from "./components/product.";
+import TopCategory from "./components/topCategory";
+import { TopProduct } from "./components/topProduct";
+
 
 
 const Detail = () => {
@@ -15,11 +18,13 @@ const Detail = () => {
 
 
   return (
-    <div className="my-4 ">
-      <div>
+    <div className=" my-4 ">
+      <div className="flex ">
+        <Category />
         <CarouselPage />
       </div>
-      <TopProduct />
+      <TopCategory />
+      <TopProduct products={products} />
       <Product products={products} />
     </div>
   );

@@ -6,11 +6,9 @@ const HomePage = () => {
 
 
   return (
-    <div>
-      <MainMenu>
-        <Detail />
-      </MainMenu>
-    </div>
+    <MainMenu>
+      <Detail />
+    </MainMenu>
 
   );
 };

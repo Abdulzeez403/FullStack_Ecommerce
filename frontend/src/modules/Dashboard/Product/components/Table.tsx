@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Space, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
 import ApImage from '@/components/images/image';
 import { IProduct } from '../models';
 import AppConfirm from '@/components/modal/comfirm';
 import { useProductContext } from '../context';
+import { BsArrowRight } from 'react-icons/bs';
 
 interface IProps {
     product: IProduct; // Assuming IProduct is an interface representing your 
@@ -91,6 +90,11 @@ const ProductTable: React.FC<IProps> = ({ product, handleModal, }) => {
                     >Delete</button>
 
                 </AppConfirm>
+
+                <div className="flex space-x-1 items-center">
+                    <h4 className='text-md text-green-600'>View</h4>
+                    <BsArrowRight color="green" />
+                </div>
             </td>
         </tr>
     );

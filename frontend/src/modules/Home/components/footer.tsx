@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 export const Footer = () => {
   return (
     <div className="">
-      <div className="  bg-black p-10 block  md:flex md:justify-between  lg:flex lg:justify-between ">
+      <div className="  bg-black p-10 px-[10rem] block  md:flex md:justify-between  lg:flex lg:justify-between ">
         <div className="w-[25%]" >
           <h4 className="text-white font-bold text-[1.5rem] py-3">
             CityStore
@@ -26,17 +26,17 @@ export const Footer = () => {
             <ul className="my-2 ">
               <li>
                 <Link href="/">
-                  <h4 className="text-white my-1"> Career Advice</h4>
+                  <h4 className="text-white my-1">Affilate Marekting</h4>
                 </Link>
               </li>
               <li>
                 <Link href="/">
-                  <h4 className="text-white my-1">Resume</h4>
+                  <h4 className="text-white my-1">Jobs</h4>
                 </Link>
               </li>
               <li>
                 <Link href="/">
-                  <h4 className="text-white  my-1">Career Development</h4>
+                  <h4 className="text-white  my-1">Staff</h4>
                 </Link>
               </li>
               <li>
@@ -46,7 +46,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link href="/">
-                  <h4 className="text-white my-1">Cover Letters</h4>
+                  <h4 className="text-white my-1">Location</h4>
                 </Link>
               </li>
               <li>

@@ -1,30 +1,26 @@
-import {
-  Form,
-  Formik,
-  FormikProps,
-} from "formik";
-import React, { useState } from "react";
-import { useProductContext } from "../context";
 import { ApTextInput } from "@/components/input";
-import { UploadProps } from "antd";
-import { Files } from "@/components/input/files";
 import { ApSelectInput } from "@/components/input/SelectInput";
-import Cookies from 'universal-cookie';
+import { Files } from "@/components/input/files";
+import { Input, UploadProps } from "antd";
+import { Formik, FormikProps, Form, Field } from "formik";
+import { useState } from "react";
+import Cookies from "universal-cookie";
+import { useProductContext } from "../context";
 import { IProduct } from "../models";
-import * as Yup from "yup";
+
 
 interface IProps {
   product: IProduct;
   onDismiss: () => void;
 }
 
-let FormSchema = Yup.object().shape({
-  // Product_name: Yup.string().required("Product_name is required"),
-  // categories: Yup.string().required("categories is required"),
-  // price: Yup.string().required("Price is required"),
-  // description: Yup.string().required("Product_name is required"),
+// let FormSchema = Yup.object().shape({
+//   // Product_name: Yup.string().required("Product_name is required"),
+//   // categories: Yup.string().required("categories is required"),
+//   // price: Yup.string().required("Price is required"),
+//   // description: Yup.string().required("Product_name is required"),
 
-});
+// });
 
 
 
@@ -78,23 +74,24 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
   return (
     <Formik
       initialValues={{
-        product_name: product?.Product_name || "",
+        Product_name: product?.Product_name || "",
         categories: product?.categories?.map((c) => c?.value) || "",
         price: product?.price || "",
         description: product?.description || "",
-        color: product?.color || "", soldout: "", quantity: ""
+        // color: product?.color || "", soldout: "", quantity: ""
       }}
-      validationSchema={FormSchema}
+      // validationSchema={FormSchema}
       onSubmit={handleSubmit}
     >
       {(props: FormikProps<any>) => (
-        <Form className=" ">
+        <Form>
           <ApTextInput
             type="text"
-            label="Name"
-            name="product_name"
-            className=" p-2 rounded-md outline-0 border hover:bg-white  "
+            label="Product_name"
+            name="Product_name"
+            className=" p-2 rounded-md outline-0 border  hover:bg-white "
           />
+          <Field name="Product_name" placeholder="Last Name" />
 
           <ApTextInput
             type="text"
@@ -139,14 +136,10 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
 
           <button
             type="submit"
-            className="text-white bg-blue-500 rounded-md  px-10   my-6"
+            className="text-white bg-blue-500 rounded-md  px-10 py-2  my-6"
           >
-            {product?._id ? loading ? "Loading" : "Update Product" : loading ? "Loading" : "Add Product"}
+            {product?._id ? loading ? "Loading" : "Update Product" : loading ? "Loading..." : "Add Product"}
           </button>
-
-
-
-
         </Form>
       )}
     </Formik>

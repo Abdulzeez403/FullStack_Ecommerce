@@ -1,31 +1,21 @@
 import React from "react";
 import { Carousel } from "antd";
-import Image from "next/image";
-import ApImage from "@/components/images/image";
+import Image from "next/image"
+import image1 from "../../../../public/images/Desktop_Homepage.png"
+import image2 from "../../../../public/images/hero2.png"
+import image3 from "../../../../public/images/hero2.png"
 
-const contentStyle: React.CSSProperties = {
-  height: "384px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-  borderRadius: "10px",
-};
 
 export const CarouselPage = () => {
   return (
-    <div className="flex justify-center m-0 items-center ">
-      <div className="w-[430px] px-8  md:w-[40rem] lg:w-[82rem]">
-
-        <Carousel autoplay dots={true}>
-          <ApImage imgUrl="/../public/images/hero2.png " alt="phone"
-          />
-
-          <ApImage imgUrl="/../public/images/Desktop_Homepage.png " alt="phone" />
-          <ApImage imgUrl="/../public/images/Desktop.jpg" alt="phone" />
-        </Carousel>
-      </div>
+    <div className="w-96 lg:w-[80%]">
+      <Carousel autoplay dots={true} dotPosition="right" >
+        <Image src={image1} alt="phone" />
+        <Image src={image2} alt="phone" />
+        <Image src={image3} alt="phone" />
+      </Carousel>
     </div>
+
 
   );
 };

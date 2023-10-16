@@ -7,6 +7,8 @@ import { DashboardNav } from "../Layout/dashboard";
 import ApModal from "@/components/modal/modal";
 import { CreatePost } from "./components/create";
 import { IProduct } from "./models";
+import { Breadcrumb, Button, Input } from "antd";
+import { Head } from "next/document";
 
 const ProductPage = () => {
 
@@ -38,11 +40,59 @@ const ProductPage = () => {
 
   return (
     <DashboardNav>
-      <div>
-        <button onClick={handleCreateProduct} className='bg-black text-white rounded-md py-2 px-2 '>Create Product</button>
+
+      <Breadcrumb items={[{ title: 'Product' }]} />
+      <div className="flex justify-between items-center my-4">
+        <div className="hidden md:flex lg:flex ">
+          <div className="w-[30rem] md:w-[20rem] lg:w-[30rem]">
+            <Input
+              size="large"
+              placeholder="Search products, brand and categories"
+              allowClear={false}
+              className="w-[100%] rounded-md py-2"
+
+            // value={searchValue}
+            // onChange={handleInputChange}
+            />
+          </div>
+          <div className="space-x-2 items-center px-2">
+
+            <Button
+              type="primary"
+              size="large"
+              className="text-black border-black font-semibold rounded-l-none p-x-2 "
+            // onClick={() => onSearch()}
+
+            >
+              Clear
+            </Button>
+
+            <Button
+              type="primary"
+              size="large"
+              className="bg-black text-white font-semibold rounded-l-none p-x-2 "
+            // onClick={() => onSearch()}
+
+            >
+              Search
+            </Button>
+          </div>
+
+        </div>
+        <div>
+          <Button onClick={handleCreateProduct}
+            type="primary"
+            size="large"
+            className="text-black border-black font-semibold  p-x-2 "
+          >Create Product</Button>
+        </div>
+
+
       </div>
-      <table className="min-w-full text-left text-sm bg-skin-alt border">
-        <thead className="border-b font-medium bg-slate-300">
+
+
+      <table className="min-w-full text-left text-sm bg-skin-alt rounded-md ">
+        <thead className="border-b font-medium bg-slate-300 rounded-lg">
           <tr>
             <th scope="col" className="px-6 py-4">
               Image

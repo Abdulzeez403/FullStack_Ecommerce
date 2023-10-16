@@ -20,7 +20,7 @@ const ApImage: React.FC<IProps> = ({ imgUrl, alt, width = 2000, height = 1500, c
                 alt={alt}
                 priority
                 object-fit="contain"
-                className={`bg-yellow-400 rounded-lg ${className}`}
+                className={`rounded-lg ${className}`}
             />
         </div>
     )

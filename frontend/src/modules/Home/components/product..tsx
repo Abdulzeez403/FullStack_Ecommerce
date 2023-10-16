@@ -1,34 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import ProductCard from "@/components/card";
 import Link from "next/link";
-import { AiOutlineEye, AiOutlineHeart, AiOutlineLock, AiTwotoneStar } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { IProduct } from "../models";
-import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import ApTextHeader from "@/components/typography/header";
 import { useCartContext } from "@/modules/cart/context";
 import Cookies from "universal-cookie";
-import { Button } from "antd";
 
 interface IProps {
   products: IProduct[]
 }
-export const TopProduct: React.FC<IProps> = ({ products }) => {
-
-  const myelement = useRef() as any
-
-  const handlePrevClick = () => {
-    if (myelement.current) {
-      myelement.current.scrollLeft += 200;
-
-    }
-  }
-
-  const handleNextClick = () => {
-    if (myelement.current) {
-      myelement.current.scrollLeft -= 200;
-
-    }
-  }
+export const Product: React.FC<IProps> = ({ products }) => {
 
 
   const { addCart } = useCartContext();
@@ -47,37 +29,18 @@ export const TopProduct: React.FC<IProps> = ({ products }) => {
   }
   return (
     <div className="">
-      <div className="flex justify-between py-4">
+      <div className="flex justify-start pt-6">
         <div>
-          <ApTextHeader title=" Popular Products 2023" />
+          <ApTextHeader title=" Products " />
         </div>
-        <div className="flex gap-x-2">
-          <Button
-            type="primary"
-            shape="circle"
-            className="bg-slate-400"
-            icon={
-              <BiChevronLeft size={25} />
-            }
-            onClick={handlePrevClick} />
-          <Button
-            type="primary"
-            shape="circle" icon={
-              <BiChevronRight size={25} />
-            }
-            className="bg-slate-400"
-            onClick={handleNextClick}
 
-          />
-
-        </div>
       </div>
 
-      <div className="flex w-[30rem] gap-x-2 md:w-[40rem] overflow-scroll md:overflow-auto lg:w-[80rem] lg:overflow-hidden " ref={myelement}>
+      <div className="grid grid-cols-2 lg:grid-cols-5   ">
         {products?.map((item, index) => (
           <Link href={`${item?._id}`}>
 
-            <div className="rounded-md " >
+            <div className="rounded-md my-2 " >
               <div key={item?._id} className="relative ">
                 <ProductCard
                   img={item?.images[0]?.uri}

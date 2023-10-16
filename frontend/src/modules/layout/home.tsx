@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Footer } from '../Home/components/footer';
 import { Header } from '../Home/components/header';
-import { Category } from '../Home/components/category';
 import ApModal from '@/components/modal/modal';
 import { CartPage } from '../cart/page';
 
@@ -26,8 +25,7 @@ export const MainMenu: React.FC<IProps> = ({ children }) => {
     return (
         <div>
             <Header cartModal={cartModal} />
-            <Category />
-            <div className='w-[80%] mx-auto'>
+            <div className='w-[95%] mx-auto  lg:w-[80%] lg:mx-auto'>
                 {children}
             </div>
             <ApModal

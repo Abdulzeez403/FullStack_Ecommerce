@@ -3,11 +3,12 @@ import DetailPage from '@/modules/Dashboard/Home/detail';
 import { DashboardNav } from '@/modules/Dashboard/Layout/dashboard';
 import React from 'react'
 
+
 const HomePage = () => {
   const [token] = UseAuthorization()
 
   return (
-    <DashboardNav>
+    <DashboardNav >
 
       <div>{token ?
         <div>

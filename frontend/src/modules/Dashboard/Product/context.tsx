@@ -7,7 +7,7 @@ interface IProp {
   product: IProduct,
   products: IProduct[];
   CreateProduct: (values: IProduct, UserId: any) => Promise<void>;
-  GetProducts: (categories?: any) => void;
+  GetProducts: (categories?: any) => Promise<void>;
   GetProduct: (value?: any) => void;
   GetProductDetailId: (id: any) => void;
 
@@ -22,8 +22,12 @@ const ProductContext = createContext<IProp>({
   products: [] || null,
   CreateProduct(values, UserId) {
     return null as any;
+
   },
-  GetProducts(categories) { },
+  GetProducts(categories) {
+    return null as any;
+
+  },
   GetProduct(UserId) { },
   GetProductDetailId(id) { },
 
@@ -80,7 +84,7 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
   // @Get all the products
   const GetProducts = async (categories: any) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/products?categories=${categories}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/products?categories=${categories || ''}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
       });
