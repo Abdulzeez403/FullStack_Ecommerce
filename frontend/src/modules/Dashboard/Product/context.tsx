@@ -69,6 +69,7 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
         throw new Error(`Failed to create product: ${errorMessage}`);
       }
       const newData = await response.json();
+      console.log(newData, "newData...")
       setProducts([...products, newData]);
       toast.success("Product Successfully Created");
 
@@ -135,9 +136,16 @@ export const ProductProvder: React.FC<IProps> = ({ children }) => {
 
       const data = await response.json();
       if (data) {
-        products?.filter((q, i) => (q?._id === userId ? data : q));
-        toast.success("Product Updated!")
+        setProducts((prevProducts) => {
+          return prevProducts.map((product) => {
+            if (product._id === userId) {
+              return data;
+            }
+            return product;
+          });
+        });
 
+        toast.success("Product Updated!");
       }
     } catch (error) {
       console.error("Error fetching data:", error);

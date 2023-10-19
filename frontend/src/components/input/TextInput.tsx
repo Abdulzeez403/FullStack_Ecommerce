@@ -1,5 +1,5 @@
-import { Field, useField } from "formik";
-import React from "react";
+import { ErrorMessage, Field, useField } from "formik";
+import React, { useEffect } from "react";
 
 interface IProps {
   label?: string;
@@ -7,8 +7,7 @@ interface IProps {
   name: string;
   className?: string;
   placeHolder?: string;
-  value?: any;
-
+  disabled?: boolean;
   // onChange?:(value:string)=>void;
   props?: {
     [x: string]: any;
@@ -22,20 +21,26 @@ export const ApTextInput: React.FC<IProps> = ({
   name,
   className,
   placeHolder,
-  value,
   containerClass,
+  disabled,
   ...props
 }) => {
   const [field, meta] = useField(name);
 
+  useEffect(() => {
+    // console.log(field);
+  }, [field]);
+
   return (
     <div
-      style={{ marginBottom: 10, display: "flex", flexDirection: "column" }}
+      style={{ marginBottom: 10, display: "", flexDirection: "column" }}
       className={containerClass}
     >
-      <label className="label mb-2 font-[500] text-sm text-gray-700" htmlFor="email">
-        {label}
-      </label>
+      {
+        <label className="label mb-2" htmlFor="email">
+          {label}
+        </label>
+      }
 
       {type == "textarea" ? (
         <textarea
@@ -53,7 +58,7 @@ export const ApTextInput: React.FC<IProps> = ({
           transition
           ease-in-out
           m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+          focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none
         ${className}`}
           {...field}
           {...props}
@@ -67,11 +72,10 @@ export const ApTextInput: React.FC<IProps> = ({
           {...field}
           {...props}
           name={name}
+          disabled={disabled || false}
           className={`form-control
           block
           w-full
-          px-3
-          py-1.5
           text-base
           font-normal
           text-gray-700
@@ -81,17 +85,14 @@ export const ApTextInput: React.FC<IProps> = ({
           transition
           ease-in-out
           m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+          focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none
         
           ${className}`}
           placeholder={placeHolder}
-          value={value}
         />
       )}
-      {meta.touched && meta.error && (
-        <div className="text-red-500">{meta.error}</div>
-      )}
-      {/* <ErrorMessage className="text-red-500" name={name} component="div" /> */}
+
+      <ErrorMessage className="text-red-500" name={name} component="div" />
     </div>
   );
 };

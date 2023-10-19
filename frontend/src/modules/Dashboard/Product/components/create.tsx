@@ -91,7 +91,6 @@ export const CreatePost: React.FC<IProps> = ({ product, onDismiss }) => {
             name="Product_name"
             className=" p-2 rounded-md outline-0 border  hover:bg-white "
           />
-          <Field name="Product_name" placeholder="Last Name" />
 
           <ApTextInput
             type="text"
